@@ -52,4 +52,9 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Quitting Game");
         Application.Quit();
     }
+
+    public void RestartLevel()
+    {
+        Debug.Log("Level restarted");
+    }
  }
