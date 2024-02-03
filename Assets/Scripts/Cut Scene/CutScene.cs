@@ -4,10 +4,10 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static DialogWindowTextCatalog;
+using static CutSceneTextCatalog;
 using static LevelManager;
 
-public class DialogWindow : MonoBehaviour
+public class CutScene : MonoBehaviour
 {
     
     public TextMeshProUGUI mainText;
@@ -30,8 +30,8 @@ public class DialogWindow : MonoBehaviour
 
     public void DefineDialogText(string currentState) 
     {
-        mainText.text = DialogWindowTextCatalog.FindDialogMainText(currentState);
-        bottomText.text = DialogWindowTextCatalog.FindDialogBottomText(currentState);
+        mainText.text = CutSceneTextCatalog.FindDialogMainText(currentState);
+        bottomText.text = CutSceneTextCatalog.FindDialogBottomText(currentState);
     }
 
 

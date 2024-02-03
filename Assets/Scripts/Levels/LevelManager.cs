@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
         //Switch camera
         CameraManager.SwitchActiveCamera("IntroLocation");
         //Activate Intro Pop up
-        DialogWindow dialogWindow = FindObjectOfType<DialogWindow>(); // !!! Change to FindByTag()
+        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
         if (dialogWindow != null)
         {
             dialogWindow.EnableDialogWindow();
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
     public static void FirstLevelCompleted()
     {
         CameraManager.SwitchActiveCamera("IntroLocation");
-        DialogWindow dialogWindow = FindObjectOfType<DialogWindow>(); // !!! Change to FindByTag()
+        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
         if (dialogWindow != null)
         {
             dialogWindow.EnableDialogWindow();
