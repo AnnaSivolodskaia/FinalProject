@@ -10,6 +10,7 @@ public class LitterScript : MonoBehaviour
     public GameObject protagonist;
     public Transform protagonistLoc;
     private float detectionRadius = 2f;
+
     
     public void Awake()
     {
@@ -22,7 +23,7 @@ public class LitterScript : MonoBehaviour
         protagonistLoc = protagonist.transform;
         if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
         {
-            FindObjectOfType<FirstLevelScript>().score += 100;
+            FirstLevelScript.score += 100;
             Destroy(gameObject);
         }
     }

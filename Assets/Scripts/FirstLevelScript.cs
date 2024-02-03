@@ -11,7 +11,7 @@ public class FirstLevelScript : MonoBehaviour
 {
     public GameObject can;
     List<List<float>> litterlist;
-    public int score = 0;
+    public static int score = 0;
     public GameObject ScoreCanvas;
     public TextMeshProUGUI scoreText;
     private bool? allLitterSpawned = false;
@@ -88,4 +88,5 @@ public class FirstLevelScript : MonoBehaviour
         }
         allLitterSpawned = true;
     }
+
 }
