@@ -6,12 +6,13 @@ using TMPro;
 using System;
 using Unity.UI;
 using static LevelManager;
+using static ScoreSystem;
 
 public class FirstLevelScript : MonoBehaviour
 {
     public GameObject can;
     List<List<float>> litterlist;
-    public int score = 0;
+    public static int score = 0;
     public GameObject ScoreCanvas;
     public TextMeshProUGUI scoreText;
     private bool? allLitterSpawned = false;
@@ -65,6 +66,7 @@ public class FirstLevelScript : MonoBehaviour
     {
         ScoreCanvas.SetActive(false);
         scoreText.text = null;
+        ScoreSystem.UpdateScore(score);
         FindObjectOfType<GameManagerScript>().SetState("1level_2");
         LevelManager.FirstLevelCompleted();
     }
@@ -88,4 +90,5 @@ public class FirstLevelScript : MonoBehaviour
         }
         allLitterSpawned = true;
     }
+
 }

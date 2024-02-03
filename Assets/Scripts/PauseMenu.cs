@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
         _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
         Debug.Log("Loading Menu");
         _GameManagerScript.SetState("MainMenu");
-        MenuManager.LoadMainMenu();
+        MainMenu.LoadMainMenu();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -51,5 +51,10 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Quitting Game");
         Application.Quit();
+    }
+
+    public void RestartLevel()
+    {
+        Debug.Log("Level restarted");
     }
  }

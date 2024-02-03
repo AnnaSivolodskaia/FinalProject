@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ScoreSystem;
 
 public class DialogWindowTextCatalog : MonoBehaviour
 {
@@ -43,7 +44,8 @@ public class DialogWindowTextCatalog : MonoBehaviour
                 finalText = "Press C to start again!";
                 break;
             case "1level_2":
-                finalText = "";
+                int currentScore = ScoreSystem.GetScore();
+                finalText = string.Format("Current score is: {0}", currentScore);
                 break;
             default:
                 finalText = "Not defined in catalog!";

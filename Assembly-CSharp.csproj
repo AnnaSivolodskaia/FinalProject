@@ -58,9 +58,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DialogWindowTextCatalog.cs" />
     <Compile Include="Assets\Scripts\ProtagonistMovement.cs" />
-    <Compile Include="Assets\Scripts\MenuManager.cs" />
-    <Compile Include="Assets\Scripts\StartNewGame.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\StartNewGame.cs" />
     <Compile Include="Assets\Scripts\FirstLevelScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\FreeCameraLogic.cs" />
     <Compile Include="Assets\Scripts\GameManagerScript.cs" />
@@ -70,12 +69,11 @@
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\DialogWindow.cs" />
     <Compile Include="Assets\Scripts\LitterScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryLogic.cs" />
-    <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryWearLogic.cs" />
+    <Compile Include="Assets\Scripts\ScoreSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

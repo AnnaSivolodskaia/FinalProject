@@ -18,8 +18,13 @@ public class CameraManager : MonoBehaviour
     public static void InitialiseDictionary()
     {
         //adding values to the camera location with corresponding coordinates
-        cameraLocations.Add("MainMenuLocation", new List<float> { 80.43f, 25.55f, 56.58f, 7.484f, -118.73f, 0f });
-        cameraLocations.Add("IntroLocation", new List<float> { 63.22f, 25.55f, 43.13f, 8.766f, -104.075f, -0.324f });
+        //cameraLocations.Add("MainMenuLocation", new List<float> { 80.43f, 25.55f, 56.58f, 7.484f, -118.73f, 0f });
+        //cameraLocations.Add("MainMenuLocation", new List<float> { 74.6f, 27.8f, 52.5f, -1f, -119.1f, 0f });
+
+        cameraLocations.Add("MainMenuLocation", new List<float> { 87.82863f, 26.444513f, 60.08233f, 3.885f, -119.254f, 0.001f });
+        //cameraLocations.Add("IntroLocation", new List<float> { 63.22f, 25.55f, 43.13f, 8.766f, -104.075f, -0.324f });
+        cameraLocations.Add("IntroLocation", new List<float> { 68.747678f, 24.532129f, 42.571838f, 0.619f, -96.908f, 0.001f });
+
         cameraLocations.Add("1level_1", new List<float> { 100.1115f, 27.2599f, 86.3932f, 6.81f, 135f, 0f });
         cameraLocations.Add("2level_1", new List<float> { 76.8f, 19.5f, -23.86f, 55.682f, 209.507f, 7.022f });
     }

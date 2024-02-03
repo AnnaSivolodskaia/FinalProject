@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using static CameraManager;
+using static ScoreSystem;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public static GameObject menuCanvas = GameObject.Find("MenuCanvas");
+    
+    public static void LoadMainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        CameraManager.SwitchActiveCamera("MainMenuLocation");
+        menuCanvas.SetActive(true);
+        ScoreSystem.ResetScore();
     }
 
-    public void QuitGame()
+    public static void UnloadMainMenu()
     {
-        Debug.Log("QUIT!");
-        Application.Quit();
+        menuCanvas.SetActive(false);
     }
 }

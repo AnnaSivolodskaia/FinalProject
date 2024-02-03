@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static LevelManager;
 using UnityEngine.UI;
-using static MenuManager;
+using static MainMenu;
 
 
 public class StartNewGame : MonoBehaviour
@@ -21,7 +21,7 @@ public class StartNewGame : MonoBehaviour
     void PlayButtonPressed()
     {
         _GameManagerScript.SetState("Intro_1");
-        MenuManager.UnloadMainMenu();
+        MainMenu.UnloadMainMenu();
         LevelManager.LoadIntro();
     }
 }
