@@ -10,18 +10,15 @@ public class CameraManager : MonoBehaviour
 
     private Coroutine cameraTransitionCoroutine;
 
-    private void Start()
-    {
-        InitialiseDictionary();
-    }
-
     public static void InitialiseDictionary()
     {
         //adding values to the camera location with corresponding coordinates
         //cameraLocations.Add("MainMenuLocation", new List<float> { 80.43f, 25.55f, 56.58f, 7.484f, -118.73f, 0f });
         //cameraLocations.Add("MainMenuLocation", new List<float> { 74.6f, 27.8f, 52.5f, -1f, -119.1f, 0f });
 
-        cameraLocations.Add("MainMenuLocation", new List<float> { 87.82863f, 26.444513f, 60.08233f, 3.885f, -119.254f, 0.001f });
+        //cameraLocations.Add("MainMenuLocation", new List<float> { 87.82863f, 26.444513f, 60.08233f, 3.885f, -119.254f, 0.001f });
+        cameraLocations.Add("MainMenuLocation", new List<float> { 89.68369f, 29.427282f, 59.98083f, 9.385f, -113.581f, 0.001f });
+
         //cameraLocations.Add("IntroLocation", new List<float> { 63.22f, 25.55f, 43.13f, 8.766f, -104.075f, -0.324f });
         cameraLocations.Add("IntroLocation", new List<float> { 68.747678f, 24.532129f, 42.571838f, 0.619f, -96.908f, 0.001f });
 

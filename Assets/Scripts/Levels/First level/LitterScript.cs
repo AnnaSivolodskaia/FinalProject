@@ -10,22 +10,34 @@ public class LitterScript : MonoBehaviour
     public GameObject protagonist;
     public Transform protagonistLoc;
     private float detectionRadius = 2f;
+    public GameManagerScript _GameManagerScript;
 
-    
     public void Awake()
     {
+        _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
         CountDown();
+
     }
 
     public void Update()
     {
         GameObject protagonist = GameObject.Find("Protagonist");
-        protagonistLoc = protagonist.transform;
-        if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+        
+        if (protagonist != null)
         {
-            FirstLevelScript.score += 100;
+            protagonistLoc = protagonist.transform;
+            if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+            {
+                FirstLevelScript.score += 100;
+                Destroy(gameObject);
+            }
+        }
+
+        if (_GameManagerScript.currentGameState == "1level_3")
+        {
             Destroy(gameObject);
         }
+
     }
 
     public bool IsInRadius()
@@ -40,9 +52,9 @@ public class LitterScript : MonoBehaviour
         try
         {
             Destroy(gameObject);
-            FindObjectOfType<FirstLevelScript>().Terminate();
+            FindObjectOfType<FirstLevelScript>().LevelFailed();
         }
-        catch (Exception)
+        catch (Exception)  // delete whole catch when game is ready
         {
             Debug.Log("Object has been already destroyed!");
         }
