@@ -37,11 +37,23 @@ public class FirstLevelScript : MonoBehaviour
         Spawner();
         
     }
+
+    private async Task Wait(float time)
+    {
+        float startTime = Time.time;
+        float currentTime = startTime;
+        while (currentTime - startTime < time)
+        {
+            currentTime += Time.deltaTime;
+            await Task.Yield();
+        }
+    }
+
     public async void Spawner()
     {
         for (var i = 0; i < litterlist.Count; i++)
         {
-            await Task.Delay((int)(litterlist[i][1] * 1000));
+            await Wait((int)(litterlist[i][1]));
             if(litterlist != null)
             {
                 Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
