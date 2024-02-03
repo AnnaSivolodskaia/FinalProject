@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
         _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
         Debug.Log("Loading Menu");
         _GameManagerScript.SetState("MainMenu");
-        MenuManager.LoadMainMenu();
+        MainMenu.LoadMainMenu();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
     }

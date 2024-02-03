@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using Unity.UI;
 using static LevelManager;
+using static ScoreSystem;
 
 public class FirstLevelScript : MonoBehaviour
 {
@@ -65,6 +66,7 @@ public class FirstLevelScript : MonoBehaviour
     {
         ScoreCanvas.SetActive(false);
         scoreText.text = null;
+        ScoreSystem.UpdateScore(score);
         FindObjectOfType<GameManagerScript>().SetState("1level_2");
         LevelManager.FirstLevelCompleted();
     }

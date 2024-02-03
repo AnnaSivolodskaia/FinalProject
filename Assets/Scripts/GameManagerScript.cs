@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static MenuManager;
+using static MainMenu;
 using static CameraManager;
 using UnityEngine.UI;
 
@@ -19,7 +19,7 @@ public class GameManagerScript : MonoBehaviour
         SetState("MainMenu");
         //Initialise camera locations dictionary
         CameraManager.InitialiseDictionary();
-        MenuManager.LoadMainMenu();
+        MainMenu.LoadMainMenu();
     }
 
     public void SetState(string newState)
