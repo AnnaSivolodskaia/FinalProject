@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -10,22 +11,37 @@ public class LitterScript : MonoBehaviour
     public GameObject protagonist;
     public Transform protagonistLoc;
     private float detectionRadius = 2f;
+    public GameManagerScript _GameManagerScript;
+    private CancellationTokenSource cancellationTokenSource;
 
-    
+
     public void Awake()
     {
+        _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
+        cancellationTokenSource = new CancellationTokenSource();
         CountDown();
+
     }
 
     public void Update()
     {
         GameObject protagonist = GameObject.Find("Protagonist");
-        protagonistLoc = protagonist.transform;
-        if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+        
+        if (protagonist != null)
         {
-            FirstLevelScript.score += 100;
+            protagonistLoc = protagonist.transform;
+            if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+            {
+                FirstLevelScript.score += 100;
+                Destroy(gameObject);
+            }
+        }
+
+        if (_GameManagerScript.currentGameState == "1level_3")
+        {
             Destroy(gameObject);
         }
+
     }
 
     public bool IsInRadius()
@@ -34,17 +50,56 @@ public class LitterScript : MonoBehaviour
         return distance <= detectionRadius;
     }
 
-    public async void CountDown()
+/*    public async void CountDown()
     {
-        await Task.Delay(5000);
         try
         {
+            await Task.Delay(5000, cancellationTokenSource.Token);
             Destroy(gameObject);
-            FindObjectOfType<FirstLevelScript>().Terminate();
+            FindObjectOfType<FirstLevelScript>().LevelFailed();
         }
-        catch (Exception)
+        catch (Exception)  // delete whole catch when game is ready
         {
-            Debug.Log("Object has been already destroyed!");
+            //Debug.Log("Object has been already destroyed!");
         }
+    }*/
+
+
+    public async void CountDown()
+    {
+        try
+        {
+            await Wait(5);
+            Destroy(gameObject);
+            FindObjectOfType<FirstLevelScript>().LevelFailed();
+        }
+        catch (Exception)  // delete whole catch when game is ready
+        {
+            //Debug.Log("Object has been already destroyed!");
+        }
+    }
+
+
+    private async Task Wait(float time)
+    {
+        float startTime = Time.time;
+        float currentTime = startTime;
+
+        if (_GameManagerScript.currentGameState != "1level_3")
+        {
+            while (currentTime - startTime < time)
+            {
+                currentTime += Time.deltaTime;
+                await Task.Yield();
+            }
+        }
+
+
+    }
+
+    private void OnDestroy()
+    {
+        // Cancel the CountDown when the litter is already picked up
+        cancellationTokenSource.Cancel();
     }
 }

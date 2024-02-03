@@ -15,13 +15,10 @@ public class StartNewGame : MonoBehaviour
     {
         playButton.onClick.AddListener(PlayButtonPressed);
         _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
-        Debug.Log("Debug Start");
     }
 
     void PlayButtonPressed()
     {
-        _GameManagerScript.SetState("Intro_1");
-        MainMenu.UnloadMainMenu();
-        LevelManager.LoadIntro();
+        _GameManagerScript.StartNewGame();
     }
 }

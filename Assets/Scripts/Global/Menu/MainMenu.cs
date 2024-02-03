@@ -6,10 +6,12 @@ using static ScoreSystem;
 
 public class MainMenu : MonoBehaviour
 {
-    public static GameObject menuCanvas = GameObject.Find("MenuCanvas");
+    public static GameObject menuCanvas = GameObject.Find("MainMenuCanvas");
     
     public static void LoadMainMenu()
     {
+        //Activate background environment and animations 
+
         CameraManager.SwitchActiveCamera("MainMenuLocation");
         menuCanvas.SetActive(true);
         ScoreSystem.ResetScore();
@@ -17,6 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public static void UnloadMainMenu()
     {
+        //Deactivate background environment and animations 
         menuCanvas.SetActive(false);
     }
 }

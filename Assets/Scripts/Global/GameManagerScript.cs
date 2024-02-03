@@ -13,13 +13,34 @@ public class GameManagerScript : MonoBehaviour
 
     void Start()
     {
+        //This function loads the game on start up
+
         possibleGameStates = new List<string>() { "MainMenu", "PauseMenu", "Intro_1", "Intro_2", "1level_1", "1level_3", "1level_1", "1level_2" };
         possibleLevelStates = new List<string>() { "1level_1", "2level_1" };
         
         SetState("MainMenu");
+
         //Initialise camera locations dictionary
         CameraManager.InitialiseDictionary();
         MainMenu.LoadMainMenu();
+    }
+
+    public void StartNewGame()
+    {
+        // This function initiates new game from the main menu
+
+        SetState("Intro_1");
+        MainMenu.UnloadMainMenu();
+        LevelManager.LoadIntro();
+    }
+
+    public void TerminateCurrentGame()
+    {
+        // This function reset the game progress and cleans up memory
+
+        // ! Stop current level
+        MainMenu.LoadMainMenu();
+        SetState("MainMenu");
     }
 
     public void SetState(string newState)

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static CameraManager;
 
 public class LevelManager : MonoBehaviour
 {
+
     public static void LoadIntro()
     {
         //Switch camera
@@ -20,10 +22,10 @@ public class LevelManager : MonoBehaviour
     public static void LoadNextLevel(int score, string level)
     {
         CameraManager.SwitchActiveCamera(level);
-        FirstLevelScript firstLevelScript = FindObjectOfType<FirstLevelScript>();
-        firstLevelScript.Initiate();
+
+        FindGameObject("FirstLevel").SetActive(true);
     }
-    public static void FirstLevelCompleted()
+    public static void LevelExit()
     {
         CameraManager.SwitchActiveCamera("IntroLocation");
         CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
@@ -46,5 +48,21 @@ public class LevelManager : MonoBehaviour
     public static void LoadSecretCredits()
     {
 
+    }
+
+    public static GameObject FindGameObject(string objectTag)
+    {
+        GameObject returnObject = null;
+
+        foreach (GameObject objectOnCanvas in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        {
+            if (objectOnCanvas.tag == objectTag)
+            {
+                returnObject = objectOnCanvas;
+            }
+        }
+
+        return returnObject;
+        
     }
 }

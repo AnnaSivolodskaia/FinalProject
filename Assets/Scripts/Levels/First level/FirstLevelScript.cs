@@ -13,75 +13,52 @@ public class FirstLevelScript : MonoBehaviour
     public GameObject can;
     List<List<float>> litterlist;
     public static int score = 0;
-    public GameObject ScoreCanvas;
     public TextMeshProUGUI scoreText;
-    private bool? allLitterSpawned = false;
+    private bool? allLitterSpawned = null;
 
 
-    public void Initiate()
+    public void OnEnable()
     {
+        // Starting the level
         allLitterSpawned = false;
+        score = 0;
         scoreText.text = "";
         litterlist = new List<List<float>>() {
-                                               new List<float>() { 1f, 6.0f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 7.5f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 5.5f, 110f, 24f, 65f }
+                                               new List<float>() { 1f, 1.0f, 110f, 24f, 65f },
+                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f }
                                                 };
-        StartLevel();
-        ScoreCanvas.SetActive(true);
+        
+        Spawner();
         
     }
 
-    private void Update()
+    private async Task Wait(float time)
     {
-        if(scoreText.text != null)
+        float startTime = Time.time;
+        float currentTime = startTime;
+        while (currentTime - startTime < time)
         {
-            scoreText.text = String.Format("Score:  {0}", score);
+            currentTime += Time.deltaTime;
+            await Task.Yield();
         }
-
-        if(allLitterSpawned == true && FindObjectOfType<LitterScript>() == null && litterlist != null)
-        {
-            allLitterSpawned = null;
-            LevelSuccessed();
-        }
-    }
-
-    public void StartLevel()
-    {
-        Spawner();
-    }
-
-    public void Terminate()
-    {
-        allLitterSpawned = null;
-        ScoreCanvas.SetActive(false);
-        score = 0;
-        scoreText.text = null;
-        litterlist = null;
-        FindObjectOfType<GameManagerScript>().SetState("1level_3");
-        LevelManager.FirstLevelCompleted();
-    }
-
-    public void LevelSuccessed()
-    {
-        ScoreCanvas.SetActive(false);
-        scoreText.text = null;
-        ScoreSystem.UpdateScore(score);
-        FindObjectOfType<GameManagerScript>().SetState("1level_2");
-        LevelManager.FirstLevelCompleted();
     }
 
     public async void Spawner()
     {
         for (var i = 0; i < litterlist.Count; i++)
         {
-            await Task.Delay((int)(litterlist[i][1] * 1000));
+            await Wait((int)(litterlist[i][1]));
             if(litterlist != null)
             {
                 Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
                 Vector3 spawnPos = new Vector3(litterlist[i][2], litterlist[i][3], litterlist[i][4]);
                 Instantiate(can, spawnPos, spawnAngle);
-                Debug.Log(i);
             } else
             {
                 break;
@@ -90,5 +67,48 @@ public class FirstLevelScript : MonoBehaviour
         }
         allLitterSpawned = true;
     }
+    private void Update()
+    {
+        // Updating score
+        if(scoreText.text != null)
+        {
+            scoreText.text = String.Format("Score:  {0}", score);
+        }
+
+        // Checking winning condition
+        if (allLitterSpawned == true && FindObjectOfType<LitterScript>() == null && litterlist != null)
+        {
+            allLitterSpawned = null;
+            LevelSuccessed();
+        }
+    }
+
+    public void LevelFailed()
+    {
+        FindObjectOfType<GameManagerScript>().SetState("1level_3");
+        
+        Terminate();
+    }
+
+    public void LevelSuccessed()
+    {
+        ScoreSystem.UpdateScore(score);
+        FindObjectOfType<GameManagerScript>().SetState("1level_2");
+     
+        Terminate();
+    }
+    public void Terminate()
+    {
+        allLitterSpawned = null;
+        scoreText.text = null;
+        litterlist = null;
+        
+        LevelManager.LevelExit();
+
+        gameObject.SetActive(false);
+    }
+
+
+
 
 }
