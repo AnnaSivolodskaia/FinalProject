@@ -56,24 +56,24 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DialogWindowTextCatalog.cs" />
-    <Compile Include="Assets\Scripts\ProtagonistMovement.cs" />
-    <Compile Include="Assets\Scripts\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\StartNewGame.cs" />
-    <Compile Include="Assets\Scripts\FirstLevelScript.cs" />
+    <Compile Include="Assets\Scripts\Cut Scene\CutSceneTextCatalog.cs" />
+    <Compile Include="Assets\Scripts\Levels\First level\ProtagonistMovement.cs" />
+    <Compile Include="Assets\Scripts\Global\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Global\StartNewGame.cs" />
+    <Compile Include="Assets\Scripts\Levels\First level\FirstLevelScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\FreeCameraLogic.cs" />
-    <Compile Include="Assets\Scripts\GameManagerScript.cs" />
+    <Compile Include="Assets\Scripts\Global\GameManagerScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\DemoFree.cs" />
-    <Compile Include="Assets\Scripts\UserInputHandler.cs" />
+    <Compile Include="Assets\Scripts\Global\UserInputHandler.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\SimpleSampleCharacterControl.cs" />
-    <Compile Include="Assets\Scripts\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\DialogWindow.cs" />
-    <Compile Include="Assets\Scripts\LitterScript.cs" />
+    <Compile Include="Assets\Scripts\Levels\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Cut Scene\CutScene.cs" />
+    <Compile Include="Assets\Scripts\Levels\First level\LitterScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryLogic.cs" />
-    <Compile Include="Assets\Scripts\PauseMenu.cs" />
-    <Compile Include="Assets\Scripts\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\Global\ScoreSystem.cs" />
+    <Compile Include="Assets\Scripts\Global\Menu\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\Global\CameraManager.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryWearLogic.cs" />
-    <Compile Include="Assets\Scripts\ScoreSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

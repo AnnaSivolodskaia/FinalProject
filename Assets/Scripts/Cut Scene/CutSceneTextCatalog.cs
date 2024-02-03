@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static ScoreSystem;
 
-public class DialogWindowTextCatalog : MonoBehaviour
+public class CutSceneTextCatalog : MonoBehaviour
 {
     public static string FindDialogMainText(string currentGameState)
 	{
