@@ -4,24 +4,24 @@ using UnityEngine;
 using static MainMenu;
 using static CameraManager;
 using UnityEngine.UI;
+using JetBrains.Annotations;
 
 public class GameManagerScript : MonoBehaviour
 {
-    public string currentGameState;
     public List<string> possibleGameStates;
     public List<string> possibleLevelStates;
+
 
     void Start()
     {
         //This function loads the game on start up
 
-        possibleGameStates = new List<string>() { "MainMenu", "PauseMenu", "Intro_1", "Intro_2", "1level_1", "1level_3", "1level_1", "1level_2" };
-        possibleLevelStates = new List<string>() { "1level_1", "2level_1" };
-        
-        SetState("MainMenu");
+        //Initiating game states
+        StatesManager.Initiate();
+        StatesManager.SetState("MainMenu");
 
-        //Initialise camera locations dictionary
-        CameraManager.InitialiseDictionary();
+        //Initiate camera locations dictionary
+        CameraManager.InitiateDictionary();
         MainMenu.LoadMainMenu();
     }
 
@@ -29,44 +29,22 @@ public class GameManagerScript : MonoBehaviour
     {
         // This function initiates new game from the main menu
 
-        SetState("Intro_1");
+        StatesManager.PositiveGameProgression();
         MainMenu.UnloadMainMenu();
-        LevelManager.LoadIntro();
     }
 
-    public void TerminateCurrentGame()
+    public void TerminateCurrentGame()  // Refactor!
     {
         // This function reset the game progress and cleans up memory
 
-        // ! Stop current level
-        MainMenu.LoadMainMenu();
-        SetState("MainMenu");
-    }
-
-    public void SetState(string newState)
-    {
-        if(possibleGameStates.Contains(newState))
+        FindObjectOfType<FirstLevelScript>().LevelFailed(); // !!! Change to FindByTag()
+        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
+        if (dialogWindow != null)
         {
-            Debug.Log("Switching game state from: " + currentGameState + ". Switched to: " + newState);
-            currentGameState = newState;
-        } else
-        {
-            Debug.Log("UNDEFINED STATE " + newState);
+            dialogWindow.DisableDialogWindow();
         }
+
+        MainMenu.LoadMainMenu();
+        StatesManager.SetState("MainMenu");
     }
-
-    public void ProgressState()
-    {
-        Debug.Log("Game state progressing...");
-
-        int nextStateIndex = possibleGameStates.IndexOf(currentGameState) + 1;
-        SetState(possibleGameStates[nextStateIndex]);
-    }
-
-    public string CheckNextState()
-    {
-        int nextStateIndex = possibleGameStates.IndexOf(currentGameState) + 1;
-        return possibleGameStates[nextStateIndex];
-    }
-
 }

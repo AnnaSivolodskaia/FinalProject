@@ -6,12 +6,11 @@ using static CameraManager;
 
 public class LevelManager : MonoBehaviour
 {
-
-    public static void LoadIntro()
+    public static void LoadCutScene()
     {
         //Switch camera
-        CameraManager.SwitchActiveCamera("IntroLocation");
-        //Activate Intro Pop up
+        CameraManager.SwitchActiveCamera("CutSceneLocation");
+        //Activate dialog window
         CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
         if (dialogWindow != null)
         {
@@ -19,23 +18,34 @@ public class LevelManager : MonoBehaviour
         }   
     }
 
-    public static void LoadNextLevel(int score, string level)
+    public static void UnloadCutScene()
     {
-        CameraManager.SwitchActiveCamera(level);
-
-        FindGameObject("FirstLevel").SetActive(true);
-    }
-    public static void LevelExit()
-    {
-        CameraManager.SwitchActiveCamera("IntroLocation");
+        //Deactivate dialog window
         CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
         if (dialogWindow != null)
         {
-            dialogWindow.EnableDialogWindow();
+            dialogWindow.DisableDialogWindow();
         }
     }
 
+    public static void LoadLevel(string level)
+    {
+        CameraManager.SwitchActiveCamera(level);
+
+        FindGameObject(StatesManager.gameStates[level].stateName).SetActive(true);
+    }
+    public static void UnloadLevel()
+    {
+
+    }
+
+
     public static void LoadOutro()
+    {
+
+    }
+
+    public static void UnloadOutro()
     {
 
     }
@@ -45,7 +55,17 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public static void UnloadCredits()
+    {
+
+    }
+
     public static void LoadSecretCredits()
+    {
+
+    }
+
+    public static void UnloadSecretCredits()
     {
 
     }

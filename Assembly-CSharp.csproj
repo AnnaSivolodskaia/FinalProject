@@ -74,6 +74,8 @@
     <Compile Include="Assets\Scripts\Global\Menu\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Global\CameraManager.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryWearLogic.cs" />
+    <Compile Include="Assets\Scripts\Global\State.cs" />
+    <Compile Include="Assets\Scripts\Global\StatesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

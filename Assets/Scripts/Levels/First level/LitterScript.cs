@@ -11,16 +11,10 @@ public class LitterScript : MonoBehaviour
     public GameObject protagonist;
     public Transform protagonistLoc;
     private float detectionRadius = 2f;
-    public GameManagerScript _GameManagerScript;
-    private CancellationTokenSource cancellationTokenSource;
-
 
     public void Awake()
     {
-        _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
-        cancellationTokenSource = new CancellationTokenSource();
         CountDown();
-
     }
 
     public void Update()
@@ -37,7 +31,7 @@ public class LitterScript : MonoBehaviour
             }
         }
 
-        if (_GameManagerScript.currentGameState == "1level_3")
+        if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
         {
             Destroy(gameObject);
         }
@@ -49,21 +43,6 @@ public class LitterScript : MonoBehaviour
         float distance = Vector3.Distance(transform.position, protagonistLoc.position);
         return distance <= detectionRadius;
     }
-
-/*    public async void CountDown()
-    {
-        try
-        {
-            await Task.Delay(5000, cancellationTokenSource.Token);
-            Destroy(gameObject);
-            FindObjectOfType<FirstLevelScript>().LevelFailed();
-        }
-        catch (Exception)  // delete whole catch when game is ready
-        {
-            //Debug.Log("Object has been already destroyed!");
-        }
-    }*/
-
 
     public async void CountDown()
     {
@@ -79,13 +58,12 @@ public class LitterScript : MonoBehaviour
         }
     }
 
-
     private async Task Wait(float time)
     {
         float startTime = Time.time;
         float currentTime = startTime;
 
-        if (_GameManagerScript.currentGameState != "1level_3")
+        if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
         {
             while (currentTime - startTime < time)
             {
@@ -93,13 +71,5 @@ public class LitterScript : MonoBehaviour
                 await Task.Yield();
             }
         }
-
-
-    }
-
-    private void OnDestroy()
-    {
-        // Cancel the CountDown when the litter is already picked up
-        cancellationTokenSource.Cancel();
     }
 }

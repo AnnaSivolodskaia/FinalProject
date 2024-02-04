@@ -16,10 +16,10 @@ public class CutSceneTextCatalog : MonoBehaviour
             case "Intro_2":
                 finalText = "Some other text for second screen.";
                 break;
-            case "1level_3":
+            case "1lvl_3":
                 finalText = "Level failed... :( ";
                 break;
-            case "1level_2":
+            case "1lvl_2":
                 finalText = "Level completed! :) ";
                 break;
             default:
@@ -40,10 +40,10 @@ public class CutSceneTextCatalog : MonoBehaviour
             case "Intro_2":
                 finalText = "Press C to start!";
                 break;
-            case "1level_3":
+            case "1lvl_3":
                 finalText = "Press C to start again!";
                 break;
-            case "1level_2":
+            case "1lvl_2":
                 int currentScore = ScoreSystem.GetScore();
                 finalText = string.Format("Current score is: {0}", currentScore);
                 break;

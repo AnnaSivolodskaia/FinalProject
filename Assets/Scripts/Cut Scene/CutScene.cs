@@ -12,13 +12,11 @@ public class CutScene : MonoBehaviour
     
     public TextMeshProUGUI mainText;
     public TextMeshProUGUI bottomText;
-    public GameManagerScript _GameManagerScript;
 
     public void EnableDialogWindow()
     {
-        _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
         GetComponent<Animator>().SetTrigger("Enable");
-        DefineDialogText(_GameManagerScript.currentGameState);
+        DefineDialogText(StatesManager.currentGameState);
         UserInputHandler.Input_C += CheckUserAction;
     }
 
@@ -34,23 +32,16 @@ public class CutScene : MonoBehaviour
         bottomText.text = CutSceneTextCatalog.FindDialogBottomText(currentState);
     }
 
-
     public void SwitchDialogContent()
     {
-        _GameManagerScript.ProgressState();
-        DefineDialogText(_GameManagerScript.currentGameState);
-
-
+        DefineDialogText(StatesManager.currentGameState);
     }
 
     public void CheckUserAction()
     {
-        if (_GameManagerScript.possibleLevelStates.Contains(_GameManagerScript.CheckNextState()))
-        {
-            DisableDialogWindow();
-            _GameManagerScript.ProgressState();
-            LevelManager.LoadNextLevel(0, _GameManagerScript.currentGameState);
-        } else
+        StatesManager.PositiveGameProgression();
+
+        if (StatesManager.gameStates[StatesManager.currentGameState].isCutScene)
         {
             SwitchDialogContent();
         }
