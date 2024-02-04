@@ -85,16 +85,16 @@ public class FirstLevelScript : MonoBehaviour
 
     public void LevelFailed()
     {
-        FindObjectOfType<GameManagerScript>().SetState("1level_3");
-        
+        StatesManager.NegativeGameProgression();
+
         Terminate();
     }
 
     public void LevelSuccessed()
     {
         ScoreSystem.UpdateScore(score);
-        FindObjectOfType<GameManagerScript>().SetState("1level_2");
-     
+        StatesManager.PositiveGameProgression();
+
         Terminate();
     }
     public void Terminate()
@@ -103,8 +103,6 @@ public class FirstLevelScript : MonoBehaviour
         scoreText.text = null;
         litterlist = null;
         
-        LevelManager.LevelExit();
-
         gameObject.SetActive(false);
     }
 

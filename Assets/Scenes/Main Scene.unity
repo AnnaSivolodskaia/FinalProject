@@ -1516,7 +1516,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainText: {fileID: 1673732478}
   bottomText: {fileID: 1295905937}
-  _GameManagerScript: {fileID: 0}
 --- !u!95 &125429493
 Animator:
   serializedVersion: 5
@@ -21393,8 +21392,8 @@ GameObject:
   - component: {fileID: 1706929150}
   - component: {fileID: 1706929149}
   m_Layer: 0
-  m_Name: FirstLevel
-  m_TagString: FirstLevel
+  m_Name: First Level Gameplay
+  m_TagString: First Level Gameplay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22700,7 +22699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9de5d4f635f5346a643f9397601c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameState: 
   possibleGameStates: []
   possibleLevelStates: []
 --- !u!1001 &1808370719
@@ -23943,7 +23941,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainText: {fileID: 1074909324}
   bottomText: {fileID: 1422611334}
-  _GameManagerScript: {fileID: 0}
 --- !u!1001 &1876671915
 PrefabInstance:
   m_ObjectHideFlags: 0
