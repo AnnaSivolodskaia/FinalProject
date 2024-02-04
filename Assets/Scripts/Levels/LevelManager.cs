@@ -34,9 +34,9 @@ public class LevelManager : MonoBehaviour
 
         FindGameObject(StatesManager.gameStates[level].stateName).SetActive(true);
     }
-    public static void UnloadLevel()
+    public static void UnloadLevel(string level)
     {
-
+        FindGameObject(StatesManager.gameStates[level].stateName).SetActive(false);
     }
 
 

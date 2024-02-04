@@ -85,25 +85,23 @@ public class FirstLevelScript : MonoBehaviour
 
     public void LevelFailed()
     {
-        StatesManager.NegativeGameProgression();
-
         Terminate();
+
+        StatesManager.NegativeGameProgression();
     }
 
     public void LevelSuccessed()
     {
+        Terminate();
+
         ScoreSystem.UpdateScore(score);
         StatesManager.PositiveGameProgression();
-
-        Terminate();
     }
     public void Terminate()
     {
         allLitterSpawned = null;
         scoreText.text = null;
-        litterlist = null;
-        
-        gameObject.SetActive(false);
+        litterlist = null;   
     }
 
 

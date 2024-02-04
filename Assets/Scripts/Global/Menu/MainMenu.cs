@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using static CameraManager;
 using static ScoreSystem;
@@ -13,13 +14,13 @@ public class MainMenu : MonoBehaviour
         //Activate background environment and animations 
 
         CameraManager.SwitchActiveCamera("MainMenuLocation");
-        menuCanvas.SetActive(true);
+        menuCanvas.GetComponent<Animator>().SetTrigger("Enable");
         ScoreSystem.ResetScore();
     }
 
     public static void UnloadMainMenu()
     {
-        //Deactivate background environment and animations 
-        menuCanvas.SetActive(false);
+        // ! Deactivate background environment and animations 
+        menuCanvas.GetComponent<Animator>().SetTrigger("Disable");
     }
 }
