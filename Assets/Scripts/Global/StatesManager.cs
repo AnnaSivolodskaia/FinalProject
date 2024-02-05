@@ -11,6 +11,7 @@ public class StatesManager : MonoBehaviour
 
     public static bool wasLvl;
     public static bool wasCutScn;
+    public static string wasState;
 
     public static void Initiate()
     {
@@ -41,6 +42,7 @@ public class StatesManager : MonoBehaviour
     {
         wasLvl = gameStates[currentGameState].isLevel;
         wasCutScn = gameStates[currentGameState].isCutScene;
+        wasState = currentGameState;
 
         SetState(gameStates[currentGameState].nextPositiveState);
 
@@ -61,7 +63,7 @@ public class StatesManager : MonoBehaviour
 
         if (!gameStates[currentGameState].isLevel && wasLvl)
         {
-            LevelManager.UnloadLevel();
+            LevelManager.UnloadLevel(wasState);
         }
     }
 
@@ -69,6 +71,7 @@ public class StatesManager : MonoBehaviour
     {
         wasLvl = gameStates[currentGameState].isLevel;
         wasCutScn = gameStates[currentGameState].isCutScene;
+        wasState = currentGameState;
 
         SetState(gameStates[currentGameState].nextNegativeState);
 
@@ -79,7 +82,7 @@ public class StatesManager : MonoBehaviour
 
         if (!gameStates[currentGameState].isLevel && wasLvl)
         {
-            LevelManager.UnloadLevel();
+            LevelManager.UnloadLevel(wasState);
         }
     }
 }

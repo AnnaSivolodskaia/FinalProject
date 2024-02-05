@@ -38,6 +38,12 @@ public class FirstLevelScript : MonoBehaviour
         
     }
 
+
+    private void OnDisable()
+    {
+        Terminate();
+    }
+
     private async Task Wait(float time)
     {
         float startTime = Time.time;
@@ -63,9 +69,12 @@ public class FirstLevelScript : MonoBehaviour
             {
                 break;
             }
-            
+            if(litterlist.Count - 1 == i)
+            {
+                allLitterSpawned = true;
+            }
         }
-        allLitterSpawned = true;
+        
     }
     private void Update()
     {
@@ -86,25 +95,20 @@ public class FirstLevelScript : MonoBehaviour
     public void LevelFailed()
     {
         StatesManager.NegativeGameProgression();
-
-        Terminate();
     }
 
     public void LevelSuccessed()
     {
         ScoreSystem.UpdateScore(score);
         StatesManager.PositiveGameProgression();
-
-        Terminate();
     }
     public void Terminate()
     {
         allLitterSpawned = null;
         scoreText.text = null;
-        litterlist = null;
-        
-        gameObject.SetActive(false);
+        litterlist = null;   
     }
+
 
 
 

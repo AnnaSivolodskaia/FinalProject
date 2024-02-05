@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Levels\First level\ProtagonistMovement.cs" />
     <Compile Include="Assets\Scripts\Global\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Global\StartNewGame.cs" />
+    <Compile Include="Assets\Scripts\Global\StatesManager.cs" />
     <Compile Include="Assets\Scripts\Levels\First level\FirstLevelScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\FreeCameraLogic.cs" />
     <Compile Include="Assets\Scripts\Global\GameManagerScript.cs" />
@@ -72,10 +73,9 @@
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryLogic.cs" />
     <Compile Include="Assets\Scripts\Global\ScoreSystem.cs" />
     <Compile Include="Assets\Scripts\Global\Menu\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\Global\State.cs" />
     <Compile Include="Assets\Scripts\Global\CameraManager.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryWearLogic.cs" />
-    <Compile Include="Assets\Scripts\Global\State.cs" />
-    <Compile Include="Assets\Scripts\Global\StatesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -732,11 +732,23 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.16f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.LiveCapture">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.011">
+      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.011.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEditorBridge.007">
+      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.007.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.LiveCapture.VirtualCamera">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.VirtualCamera.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
@@ -744,11 +756,14 @@
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.007">
+      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.007.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
@@ -765,8 +780,17 @@
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.LiveCapture.VideoStreaming.Server">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.VideoStreaming.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.LiveCapture.CompanionApp.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.CompanionApp.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.LiveCapture.ARKitFaceCapture">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.ARKitFaceCapture.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
@@ -774,23 +798,41 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Services.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+    <Reference Include="Unity.Tutorials.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Tutorials.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.LiveCapture.Rendering.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.Rendering.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    <Reference Include="Unity.LiveCapture.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.LiveCapture.CompanionApp">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.CompanionApp.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.LiveCapture.Rendering">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
@@ -804,11 +846,23 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.LiveCapture.VirtualCamera.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.VirtualCamera.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.LiveCapture.ARKitFaceCapture.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.ARKitFaceCapture.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.LiveCapture.GPUFrameSync">
+      <HintPath>Library\ScriptAssemblies\Unity.LiveCapture.GPUFrameSync.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tutorials.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Tutorials.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

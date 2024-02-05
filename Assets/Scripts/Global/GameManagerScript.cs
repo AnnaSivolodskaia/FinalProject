@@ -36,15 +36,18 @@ public class GameManagerScript : MonoBehaviour
     public void TerminateCurrentGame()  // Refactor!
     {
         // This function reset the game progress and cleans up memory
-
-        FindObjectOfType<FirstLevelScript>().LevelFailed(); // !!! Change to FindByTag()
-        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
-        if (dialogWindow != null)
+        MainMenu.LoadMainMenu();
+        
+        if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
         {
-            dialogWindow.DisableDialogWindow();
+            LevelManager.UnloadLevel(StatesManager.currentGameState);
         }
 
-        MainMenu.LoadMainMenu();
+        if (StatesManager.gameStates[StatesManager.currentGameState].isCutScene)
+        {
+            LevelManager.UnloadCutScene();
+        }
+
         StatesManager.SetState("MainMenu");
     }
 }
