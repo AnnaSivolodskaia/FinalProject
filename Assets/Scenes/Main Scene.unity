@@ -3119,6 +3119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 809994944}
+  restartButton: {fileID: 1629538452}
   _GameManagerScript: {fileID: 0}
 --- !u!1001 &269828714
 PrefabInstance:
@@ -3355,6 +3356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 791635665}
+  restartButton: {fileID: 0}
   _GameManagerScript: {fileID: 0}
 --- !u!1001 &288845062
 PrefabInstance:
