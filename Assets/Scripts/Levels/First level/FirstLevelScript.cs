@@ -11,7 +11,10 @@ using static ScoreSystem;
 public class FirstLevelScript : MonoBehaviour
 {
     public GameObject can;
-    List<List<float>> litterlist;
+    public GameObject banana;
+    public GameObject plasticBottle;
+    //List<List<float>> litterlist;
+    List<Litter> litterlist;
     public static int score = 0;
     public TextMeshProUGUI scoreText;
     private bool? allLitterSpawned = null;
@@ -23,18 +26,31 @@ public class FirstLevelScript : MonoBehaviour
         allLitterSpawned = false;
         score = 0;
         scoreText.text = "";
-        litterlist = new List<List<float>>() {
-                                               new List<float>() { 1f, 1.0f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f }
-                                                };
-        
-        Spawner();
+        /*        litterlist = new List<List<float>>() {
+                                                               new List<float>() { 1f, 1.0f, 110f, 24f, 65f },
+                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
+                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f }
+                                                                };*/
+        litterlist = new List<Litter>()
+        {
+            new Litter(_time: 1f, _locX: 110f, _locY: 24f, _locZ: 65f, _litterName: can),
+            new Litter(_time: 2.5f, _locX: 120f, _locY: 24f, _locZ: 75f, _litterName: banana),
+            new Litter(_time: 3f, _locX: 122f, _locY: 24f, _locZ: 78f, _litterName: can),
+            new Litter(_time: 1f, _locX: 116f, _locY: 24f, _locZ: 70f, _litterName: plasticBottle),
+            new Litter(_time: 1.5f, _locX: 110f, _locY: 24f, _locZ: 65f, _litterName: banana),
+            new Litter(_time: 2.5f, _locX: 111f, _locY: 24f, _locZ: 68f, _litterName: plasticBottle),
+            new Litter(_time: 1f, _locX: 121f, _locY: 24f, _locZ: 76f, _litterName: can),
+            new Litter(_time: 1.5f, _locX: 116f, _locY: 24f, _locZ: 70f, _litterName: can)
+          
+
+        };
+
+        LitterSpawner();
         
     }
 
@@ -55,16 +71,16 @@ public class FirstLevelScript : MonoBehaviour
         }
     }
 
-    public async void Spawner()
+    public async void LitterSpawner()
     {
         for (var i = 0; i < litterlist.Count; i++)
         {
-            await Wait((int)(litterlist[i][1]));
+            await Wait((int)(litterlist[i].time));
             if(litterlist != null)
             {
                 Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
-                Vector3 spawnPos = new Vector3(litterlist[i][2], litterlist[i][3], litterlist[i][4]);
-                Instantiate(can, spawnPos, spawnAngle);
+                Vector3 spawnPos = new Vector3(litterlist[i].locX, litterlist[i].locY, litterlist[i].locZ);
+                Instantiate(litterlist[i].littertName, spawnPos, spawnAngle);
             } else
             {
                 break;
@@ -108,9 +124,4 @@ public class FirstLevelScript : MonoBehaviour
         scoreText.text = null;
         litterlist = null;   
     }
-
-
-
-
-
 }
