@@ -11,6 +11,11 @@ public class LitterScript : MonoBehaviour
     public GameObject protagonist;
     public Transform protagonistLoc;
     private float detectionRadius = 2f;
+    float speed = 1f;
+    float amount = 5f;
+    public GameObject plasticBin;
+    public GameObject metalBin;
+    public GameObject bioBin;
 
     public void Awake()
     {
@@ -20,15 +25,63 @@ public class LitterScript : MonoBehaviour
     public void Update()
     {
         GameObject protagonist = GameObject.Find("Protagonist");
-        
+        GameObject plasticBin = GameObject.Find("PlasticTrashBin");
+        GameObject metalBin = GameObject.Find("MetalTrashBin");
+        GameObject bioBin = GameObject.Find("BioTrashBin");
+
         if (protagonist != null)
         {
             protagonistLoc = protagonist.transform;
-            if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+            if (IsInRadius())
             {
-                FirstLevelScript.score += 100;
-                Destroy(gameObject);
+                if(gameObject.tag == "BananaLitter")
+                {
+                    if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        FirstLevelScript.score += 10;
+                        Shake(bioBin);
+                        Destroy(gameObject);    
+                    } else if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.C))
+                    {
+                        FirstLevelScript.score += 5;
+                        Shake(bioBin);
+                        Destroy(gameObject);
+                    }
+                }
+                if (gameObject.tag == "BottleLitter")
+                {
+                    if (Input.GetKeyDown(KeyCode.X))
+                    {
+                        FirstLevelScript.score += 10;
+                        Shake(plasticBin);
+                        Destroy(gameObject);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.C))
+                    {
+                        FirstLevelScript.score += 5;
+                        Shake(plasticBin);
+                        Destroy(gameObject);
+                    }
+                }
+                if (gameObject.tag == "CanLitter")
+                {
+                    if (Input.GetKeyDown(KeyCode.C))
+                    {
+                        FirstLevelScript.score += 10;
+                        Shake(metalBin);
+                        Destroy(gameObject);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X))
+                    {
+                        FirstLevelScript.score += 5;
+                        Shake(metalBin);
+                        Destroy(gameObject);
+                    }
+                }
+                
             }
+
+
         }
 
         if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
@@ -42,6 +95,11 @@ public class LitterScript : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, protagonistLoc.position);
         return distance <= detectionRadius;
+    }
+
+    public void Shake(GameObject bin)
+    {
+       bin.GetComponent<Animator>().SetTrigger("enabled");
     }
 
     public async void CountDown()

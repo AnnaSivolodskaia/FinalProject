@@ -7,6 +7,10 @@ TagManager:
   - Cube1
   - Cube2
   - First Level Gameplay
+  - PlasticBin
+  - BananaLitter
+  - CanLitter
+  - BottleLitter
   layers:
   - Default
   - TransparentFX
