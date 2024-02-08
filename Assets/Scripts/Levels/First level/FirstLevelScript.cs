@@ -38,14 +38,14 @@ public class FirstLevelScript : MonoBehaviour
                                                                 };*/
         litterlist = new List<Litter>()
         {
-            new Litter(_time: 1f, _locX: 110f, _locY: 24f, _locZ: 65f, _litterName: can),
-            new Litter(_time: 2.5f, _locX: 120f, _locY: 24f, _locZ: 75f, _litterName: banana),
-            new Litter(_time: 3f, _locX: 122f, _locY: 24f, _locZ: 78f, _litterName: can),
-            new Litter(_time: 1f, _locX: 116f, _locY: 24f, _locZ: 70f, _litterName: plasticBottle),
-            new Litter(_time: 1.5f, _locX: 110f, _locY: 24f, _locZ: 65f, _litterName: banana),
-            new Litter(_time: 2.5f, _locX: 111f, _locY: 24f, _locZ: 68f, _litterName: plasticBottle),
-            new Litter(_time: 1f, _locX: 121f, _locY: 24f, _locZ: 76f, _litterName: can),
-            new Litter(_time: 1.5f, _locX: 116f, _locY: 24f, _locZ: 70f, _litterName: can)
+            new Litter(_time: 1f, _locX: 116f, _locY: 24f, _locZ: 59f, _litterName: can),
+            new Litter(_time: 2.5f, _locX: 123f, _locY: 22f, _locZ: 65f, _litterName: banana),
+            new Litter(_time: 3f, _locX: 117f, _locY: 22f, _locZ: 60f, _litterName: can),
+            new Litter(_time: 1f, _locX: 119f, _locY: 24f, _locZ: 62f, _litterName: plasticBottle),
+            new Litter(_time: 1.5f, _locX: 126f, _locY: 24f, _locZ: 70f, _litterName: banana),
+            new Litter(_time: 2.5f, _locX: 114f, _locY: 24f, _locZ: 56f, _litterName: plasticBottle),
+            new Litter(_time: 1f, _locX: 121f, _locY: 24f, _locZ: 65f, _litterName: can),
+            new Litter(_time: 1.5f, _locX: 116f, _locY: 24f, _locZ: 59f, _litterName: can)
           
 
         };
