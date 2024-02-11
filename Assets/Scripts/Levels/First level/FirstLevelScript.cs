@@ -10,14 +10,26 @@ using static ScoreSystem;
 
 public class FirstLevelScript : MonoBehaviour
 {
+    // Litter prefabs
+    public List<Litter> litterlist;
+    private bool? allLitterSpawned = null;
     public GameObject can;
     public GameObject banana;
     public GameObject plasticBottle;
-    //List<List<float>> litterlist;
-    List<Litter> litterlist;
+
+    // Dwellers prefabs
+    public List<Dwellers> dwellerList;
+    public GameObject fox;
+    public GameObject racoon;
+    public GameObject tom;
+    public GameObject cat;
+    public GameObject frog;
+    public GameObject fenneko;
+    public GameObject retsuko;
+
+    // General
     public static int score = 0;
     public TextMeshProUGUI scoreText;
-    private bool? allLitterSpawned = null;
 
 
     public void OnEnable()
@@ -26,16 +38,8 @@ public class FirstLevelScript : MonoBehaviour
         allLitterSpawned = false;
         score = 0;
         scoreText.text = "";
-        /*        litterlist = new List<List<float>>() {
-                                                               new List<float>() { 1f, 1.0f, 110f, 24f, 65f },
-                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f },
-                                                               new List<float>() { 1f, 1.5f, 110f, 24f, 65f }
-                                                                };*/
+
+        // Defining litter to be spawned on the level
         litterlist = new List<Litter>()
         {
             new Litter(_time: 1f, _locX: 116f, _locY: 24f, _locZ: 59f, _litterName: can),
@@ -50,8 +54,33 @@ public class FirstLevelScript : MonoBehaviour
 
         };
 
-        LitterSpawner();
-        
+        //LitterSpawner();
+
+        // Defining dwellers to be spawned on the level
+        dwellerList = new List<Dwellers>()
+        {
+            new Dwellers(_time: 1.5f, _travelRoute: 0, _currentTravelSpot: 0, _locX: 111f, _locY: 23f, _locZ: 47f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 1, _currentTravelSpot: 0, _locX: 146f, _locY: 23f, _locZ: 91f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+
+            new Dwellers(_time: 1.5f, _travelRoute: 3, _currentTravelSpot: 0, _locX: 148f, _locY: 24f, _locZ: 55f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+
+            new Dwellers(_time: 1.5f, _travelRoute: 2, _currentTravelSpot: 0, _locX: 111f, _locY: 23f, _locZ: 47f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 1, _currentTravelSpot: 0, _locX: 146f, _locY: 23f, _locZ: 91f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+
+            new Dwellers(_time: 1.5f, _travelRoute: 3, _currentTravelSpot: 0, _locX: 148f, _locY: 24f, _locZ: 55f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+
+            new Dwellers(_time: 1.5f, _travelRoute: 0, _currentTravelSpot: 0, _locX: 111f, _locY: 23f, _locZ: 47f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 1, _currentTravelSpot: 0, _locX: 146f, _locY: 23f, _locZ: 91f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 2, _currentTravelSpot: 0, _locX: 111f, _locY: 23f, _locZ: 47f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 1, _currentTravelSpot: 0, _locX: 146f, _locY: 23f, _locZ: 91f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 0, _currentTravelSpot: 0, _locX: 111f, _locY: 23f, _locZ: 47f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 1, _currentTravelSpot: 0, _locX: 146f, _locY: 23f, _locZ: 91f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 2, _currentTravelSpot: 0, _locX: 111f, _locY: 23f, _locZ: 47f, _dwellerModel: fenneko, _dwellerSpeed: 1f),
+            new Dwellers(_time: 1.5f, _travelRoute: 1, _currentTravelSpot: 0, _locX: 146f, _locY: 23f, _locZ: 91f, _dwellerModel: fenneko, _dwellerSpeed: 1f)
+        };
+
+        DwellerSpawner();
+
     }
 
 
@@ -92,6 +121,27 @@ public class FirstLevelScript : MonoBehaviour
         }
         
     }
+
+    public async void DwellerSpawner()
+    {
+        for (var i = 0; i < dwellerList.Count; i++)
+        {
+            await Wait((int)(dwellerList[i].time));
+            if (dwellerList != null)
+            {
+                Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
+                Vector3 spawnPos = new Vector3(dwellerList[i].locX, dwellerList[i].locY, dwellerList[i].locZ);
+                Instantiate(dwellerList[i].dwellerModel, spawnPos, spawnAngle).GetComponent<DwellerScript>().setTravelRoute(dwellerList[i].travelRoute, dwellerList[i].currentTravelSpot);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+    }
+
+
     private void Update()
     {
         // Updating score
@@ -121,7 +171,8 @@ public class FirstLevelScript : MonoBehaviour
     public void Terminate()
     {
         allLitterSpawned = null;
+        litterlist = null;
+        dwellerList = null;
         scoreText.text = null;
-        litterlist = null;   
     }
 }
