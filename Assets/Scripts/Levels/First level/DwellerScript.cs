@@ -44,7 +44,7 @@ public class DwellerScript : MonoBehaviour
 
             },
             
-            // third route: behind center to far right
+            // third route: far right to behind center
             new List<List<float>>()
             {
                 //pos.x, pos.z
@@ -56,7 +56,7 @@ public class DwellerScript : MonoBehaviour
                 new List<float>(){146f, 54f}
             },
 
-            // fourth route: far right to behind center
+            // fourth route: behind center to far right
             new List<List<float>>()
             {
                 //pos.x, pos.z
@@ -75,10 +75,11 @@ public class DwellerScript : MonoBehaviour
         currentPosZ = gameObject.transform.position.z;
     }
 
-    public void setTravelRoute(int _travelRoute, int _currentTravelSpot)
+    public void setParameters(int _travelRoute, int _currentTravelSpot, float _dwellerSpeed)
     {
         travelRoute = travelRoutes[_travelRoute];
         currentTravelSpot = _currentTravelSpot;
+        movementSpeed = _dwellerSpeed;
     }
 
     // Update is called once per frame

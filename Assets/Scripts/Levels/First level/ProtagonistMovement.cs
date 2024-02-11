@@ -41,7 +41,6 @@ public class ProtagonistMovement : MonoBehaviour
 
             //movement
             transform.Translate(Vector3.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime);
-            Debug.Log("Horizontal input: " + turn);
         }
         else
         {
