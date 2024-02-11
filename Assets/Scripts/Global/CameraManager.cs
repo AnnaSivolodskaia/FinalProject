@@ -20,7 +20,8 @@ public class CameraManager : MonoBehaviour
         cameraLocations.Add("MainMenuLocation", new List<float> { 89.68369f, 29.427282f, 59.98083f, 9.385f, -113.581f, 0.001f });
 
         //cameraLocations.Add("IntroLocation", new List<float> { 63.22f, 25.55f, 43.13f, 8.766f, -104.075f, -0.324f });
-        cameraLocations.Add("CutSceneLocation", new List<float> { 68.747678f, 24.532129f, 42.571838f, 0.619f, -96.908f, 0.001f });
+        //cameraLocations.Add("CutSceneLocation", new List<float> { 68.747678f, 24.532129f, 42.571838f, 0.619f, -96.908f, 0.001f });
+        cameraLocations.Add("CutSceneLocation", new List<float> { 68.85627f, 25.95111f, 43.02375f, 5.26f, -79.996f, 0f });
 
         //cameraLocations.Add("1lvl_1", new List<float> { 100.1115f, 27.2599f, 86.3932f, 6.81f, 135f, 0f });
         cameraLocations.Add("1lvl_1", new List<float> { 106.74057f, 30.695137f, 73.5946f, 12.135f, 119.089f, -2.36f });
