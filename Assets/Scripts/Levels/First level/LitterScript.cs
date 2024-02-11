@@ -37,11 +37,13 @@ public class LitterScript : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Z))
                     {
                         FirstLevelScript.score += 10;
+                        FirstLevelScript.bananasCollected += 1;
                         Shake(bioBin);
                         Destroy(gameObject);    
                     } else if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.C))
                     {
                         FirstLevelScript.score += 5;
+                        FirstLevelScript.mistakesMade += 1;
                         Shake(bioBin);
                         Destroy(gameObject);
                     }
@@ -51,12 +53,14 @@ public class LitterScript : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.X))
                     {
                         FirstLevelScript.score += 10;
+                        FirstLevelScript.bottlesCollected += 1;
                         Shake(plasticBin);
                         Destroy(gameObject);
                     }
                     else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.C))
                     {
                         FirstLevelScript.score += 5;
+                        FirstLevelScript.mistakesMade += 1;
                         Shake(plasticBin);
                         Destroy(gameObject);
                     }
@@ -66,17 +70,24 @@ public class LitterScript : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.C))
                     {
                         FirstLevelScript.score += 10;
+                        FirstLevelScript.cansCollected += 1;
                         Shake(metalBin);
                         Destroy(gameObject);
                     }
                     else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X))
                     {
                         FirstLevelScript.score += 5;
+                        FirstLevelScript.mistakesMade += 1;
                         Shake(metalBin);
                         Destroy(gameObject);
                     }
                 }
-                
+
+                if (FirstLevelScript.mistakesMade > 4)
+                {
+                    FindObjectOfType<FirstLevelScript>().LevelFailed();
+                }
+
             }
 
 
@@ -106,11 +117,15 @@ public class LitterScript : MonoBehaviour
         {
             await Wait(5);
             Destroy(gameObject);
-            FindObjectOfType<FirstLevelScript>().LevelFailed();
+            FirstLevelScript.lostLitter += 1;
+            if (FirstLevelScript.lostLitter > 2)
+            {
+                FindObjectOfType<FirstLevelScript>().LevelFailed();
+            }
         }
-        catch (Exception)  // delete whole catch when game is ready
+        catch (Exception)
         {
-            //Debug.Log("Object has been already destroyed!");
+            
         }
     }
 
