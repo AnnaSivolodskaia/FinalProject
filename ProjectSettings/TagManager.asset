@@ -11,6 +11,7 @@ TagManager:
   - BananaLitter
   - CanLitter
   - BottleLitter
+  - Fenneko@Walking
   layers:
   - Default
   - TransparentFX

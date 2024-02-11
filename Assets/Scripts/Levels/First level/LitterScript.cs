@@ -11,8 +11,6 @@ public class LitterScript : MonoBehaviour
     public GameObject protagonist;
     public Transform protagonistLoc;
     private float detectionRadius = 2f;
-    float speed = 1f;
-    float amount = 5f;
     public GameObject plasticBin;
     public GameObject metalBin;
     public GameObject bioBin;

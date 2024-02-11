@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Global\UserInputHandler.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\SimpleSampleCharacterControl.cs" />
     <Compile Include="Assets\Scripts\Levels\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Levels\First level\DwellerScript.cs" />
     <Compile Include="Assets\Scripts\Cut Scene\CutScene.cs" />
     <Compile Include="Assets\Scripts\Levels\First level\LitterScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryLogic.cs" />
