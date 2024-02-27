@@ -124,6 +124,4 @@ public class DwellerScript : MonoBehaviour
            currentTravelSpot += 1;
         }
     }
-
-
 }

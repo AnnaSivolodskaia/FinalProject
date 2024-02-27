@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Threading.Tasks;
 using TMPro;
 using System;
-using Unity.UI;
 using static LevelManager;
 using static ScoreSystem;
 
