@@ -54,6 +54,7 @@ public class LitterScript : MonoBehaviour
                     {
                         FirstLevelScript.score += 10;
                         FirstLevelScript.bottlesCollected += 1;
+                        //shakes blue bin correctly
                         Shake(plasticBin);
                         Destroy(gameObject);
                     }

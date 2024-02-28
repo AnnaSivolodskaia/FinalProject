@@ -19,11 +19,15 @@ public class StatesManager : MonoBehaviour
         gameStates.Add("MainMenu", new State(name: "Main Menu", isLvl: false, isCutScn: false, positiveState: "Intro_1", negativeState: null));
 
         gameStates.Add("Intro_1", new State(name: "Introduction First Screen", isLvl: false, isCutScn: true, positiveState: "Intro_2", negativeState: null));
-        gameStates.Add("Intro_2", new State(name: "Introduction Second Screen", isLvl: false, isCutScn: true, positiveState: "1lvl_1", negativeState: null));
+        gameStates.Add("Intro_2", new State(name: "Introduction Second Screen", isLvl: false, isCutScn: true, positiveState: "2lvl_1", negativeState: null)); // revert to 1lvl_1   OR 2lvl_1
 
         gameStates.Add("1lvl_1", new State(name: "First Level Gameplay", isLvl: true, isCutScn: false, positiveState: "1lvl_2", negativeState: "1lvl_3"));
-        gameStates.Add("1lvl_2", new State(name: "First Level Successed", isLvl: false, isCutScn: true, positiveState: null, negativeState: null));
+        gameStates.Add("1lvl_2", new State(name: "First Level Successed", isLvl: false, isCutScn: true, positiveState: "2lvl_1", negativeState: null));
         gameStates.Add("1lvl_3", new State(name: "First Level Failed", isLvl: false, isCutScn: true, positiveState: "1lvl_1", negativeState: null));
+
+        gameStates.Add("2lvl_1", new State(name: "Second Level Gameplay", isLvl: true, isCutScn: false, positiveState: "2lvl_2", negativeState: "1lvl_3"));
+        gameStates.Add("2lvl_2", new State(name: "Second Level Successed", isLvl: false, isCutScn: true, positiveState: null, negativeState: null));
+        gameStates.Add("2lvl_3", new State(name: "Second Level Failed", isLvl: false, isCutScn: true, positiveState: "2lvl_1", negativeState: null));
     }
     public static void SetState(string newState)
     {

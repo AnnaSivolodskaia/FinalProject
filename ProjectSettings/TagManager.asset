@@ -12,6 +12,9 @@ TagManager:
   - CanLitter
   - BottleLitter
   - Fenneko@Walking
+  - Second Level Gameplay
+  - crate
+  - first_queue
   layers:
   - Default
   - TransparentFX
