@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SecondLevelDwellerScript : MonoBehaviour
@@ -14,7 +16,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
 
     public string parentQueue;
     public float patienceCapacity;
-    public bool isServed;
+    public bool isServed = false;
     public bool isStuck;
     public int placeInQueue;
 
@@ -29,25 +31,46 @@ public class SecondLevelDwellerScript : MonoBehaviour
     public bool incomingRouteFinished;
     public bool isExiting;
 
+    public GameObject protagonist;
+    DwellersQueue DwellerQueue;
 
-    public void setParameters(string _parentQueue, float _patienceCapacity, bool _isServed, bool _isStuck, int _placeInQueue)
+
+    public void setParameters(string _parentQueue, float _patienceCapacity, bool _isStuck, int _placeInQueue)
     {
         parentQueue = _parentQueue;
         patienceCapacity = _patienceCapacity;
         isStuck = _isStuck;
         placeInQueue = _placeInQueue;
-        isServed = _isServed;
 
         incomingRouteFinished = false;
         isExiting = false;
 
+        protagonist = GameObject.Find("SecondLevelProtagonist");
+
         SetRoutes(parentQueue);
+    }
+
+    public void servingDweller()
+    {
+        isServed = true;
+    }
+
+    public void unstuckDweller()
+    {
+        isStuck = false;
+    }
+
+    public void setPlaceInQueue(int index)
+    {
+        // Debug.Log("Changing place in queue from " + placeInQueue + " to " + index);
+        placeInQueue = index;
+        // Debug.Log("New place in queue: " + placeInQueue);
     }
 
     public void SetRoutes(string parentQueue)
     {
         Debug.Log("SetRoutes parentQueue = " + parentQueue);
-        DwellersQueue DwellerQueue = GameObject.Find(parentQueue).GetComponent<DwellersQueue>();
+        DwellerQueue = GameObject.Find(parentQueue).GetComponent<DwellersQueue>();
 
         incomingTravelRoute = DwellerQueue.queueIncomingRoute;
         queuePlacesSpots = DwellerQueue.queuePlaces;
@@ -70,6 +93,19 @@ public class SecondLevelDwellerScript : MonoBehaviour
         {
             // trigger "idle" animation 
         }
+
+        if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+        {
+            DwellerQueue.GetComponent<DwellersQueue>().ServeDweller();
+            // drop the crate function
+        }
+    }
+
+    public bool IsInRadius()
+    {
+        Transform protagonistLoc = protagonist.transform;
+        float distance = Vector3.Distance(transform.position, protagonistLoc.position);
+        return distance <= 5f;
     }
 
     public void defineNextAction()
@@ -140,9 +176,9 @@ public class SecondLevelDwellerScript : MonoBehaviour
         // Move towards the target position
         transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
 
-        if (Mathf.Round(gameObject.transform.position.x) == locX && Mathf.Round(gameObject.transform.position.z) == locZ)
+        if (Math.Round(gameObject.transform.position.x, 2) == locX && Math.Round(gameObject.transform.position.z, 2) == locZ)
         {
-            Debug.Log("Travel point reached, NEXT ACTION!");
+            // Debug.Log("Travel point reached, NEXT ACTION!");
             defineNextAction();
         }
     }

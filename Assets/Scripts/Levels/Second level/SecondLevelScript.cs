@@ -32,7 +32,9 @@ public class SecondLevelScript : MonoBehaviour
 
         // Defining dwellers to be spawned on the level
         possibleSpawnSpots = new List<List<float>> { new List<float> { 140f, -21f }  };
-        dwellerList.Add(new SecondLevelDwellers(_dwellerModel: tom, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: fox, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: fox, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: fox, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
 
 
         DwellerSpawner();
@@ -58,10 +60,25 @@ public class SecondLevelScript : MonoBehaviour
     
     public async void DwellerSpawner()
     {
-        await Wait(5);
-        Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
-        Vector3 spawnPos = new Vector3(possibleSpawnSpots[dwellerList[0].spawnPoint][0], 25f, possibleSpawnSpots[dwellerList[0].spawnPoint][1]);
-        Instantiate(dwellerList[0].dwellerModel, spawnPos, spawnAngle).GetComponent<SecondLevelDwellerScript>().setParameters(_parentQueue: dwellerList[0].parentQueue, _patienceCapacity: dwellerList[0].patienceCapacity, _isServed: dwellerList[0].isServed, _isStuck: dwellerList[0].isStuck, _placeInQueue: 1);
+        for (var i = 0; i < dwellerList.Count; i++)
+        {
+            if (dwellerList != null)
+            {
+                await Wait(dwellerList[i].spawnAwait);
+                Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
+                Vector3 spawnPos = new Vector3(possibleSpawnSpots[dwellerList[i].spawnPoint][0], 25f, possibleSpawnSpots[dwellerList[i].spawnPoint][1]);
+                GameObject spawnedDweller = Instantiate(dwellerList[i].dwellerModel, spawnPos, spawnAngle);
+                int spawnedDwellerPlaceInQueue = GameObject.Find(dwellerList[i].parentQueue).GetComponent<DwellersQueue>().AddDweller(spawnedDweller);
+                Debug.Log("Spawned, place in queue: " + spawnedDwellerPlaceInQueue);
+                spawnedDweller.GetComponent<SecondLevelDwellerScript>().setParameters(_parentQueue: dwellerList[i].parentQueue, _patienceCapacity: dwellerList[i].patienceCapacity, _isStuck: dwellerList[i].isStuck, _placeInQueue: spawnedDwellerPlaceInQueue);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+
     }
 
 

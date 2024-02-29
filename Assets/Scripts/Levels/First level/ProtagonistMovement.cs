@@ -10,6 +10,7 @@ public class ProtagonistMovement : MonoBehaviour
     public float rotateSpeed;
     public Animator animator;
     public string currentLevel;
+    public bool isCarryingBox;
 
     private void Start()
     {
@@ -38,6 +39,12 @@ public class ProtagonistMovement : MonoBehaviour
         {
             secondLevelMovement();
         }
+
+        // create drop/pick up funciton here first
+
+        // if any crate is in radius
+            // crate pick up funcion
+            // crate destroy function
     }
 
     private void firstLevelMovement()
@@ -73,6 +80,10 @@ public class ProtagonistMovement : MonoBehaviour
         {
             //stop walking
             animator.SetBool("Moving", false);
+            //if(is carying box)
+            //{one animation} else {
+            //another animation}
+            //same for idle pose 
         }
     }
 

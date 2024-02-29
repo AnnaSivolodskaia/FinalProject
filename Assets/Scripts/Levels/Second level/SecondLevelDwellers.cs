@@ -11,9 +11,11 @@ public class SecondLevelDwellers : MonoBehaviour
     public bool isServed;
     public bool isStuck;
     public int placeInQueue;
+    public int spawnAwait;
 
 
-    public SecondLevelDwellers(GameObject _dwellerModel, int _spawnPoint, string _parentQueue, float _patienceCapacity, bool _isServed, bool _isStuck)
+
+    public SecondLevelDwellers(GameObject _dwellerModel, int _spawnPoint, string _parentQueue, float _patienceCapacity, bool _isServed, bool _isStuck, int _spawnAwait)
     {
         dwellerModel = _dwellerModel;
         spawnPoint = _spawnPoint;
@@ -21,5 +23,6 @@ public class SecondLevelDwellers : MonoBehaviour
         patienceCapacity = _patienceCapacity;
         isStuck = _isStuck;
         isServed = _isServed;
+        spawnAwait = _spawnAwait;
     }
 }

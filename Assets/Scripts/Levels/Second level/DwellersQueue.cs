@@ -13,51 +13,60 @@ public class DwellersQueue : MonoBehaviour
     public Dictionary<string, List<List<float>>> possibleQueuePlaces = new Dictionary<string, List<List<float>>>();
     public List<List<float>> queuePlaces;
 
-    // custom queue data type
+    public List<GameObject> dwellersInQueue;
 
     private void OnEnable()
     {
-        possibleIncomingRoutes.Add("first_queue", new List<List<float>> { new List<float>{ 138f, -23f }, new List<float> { 140f, -20f }, new List<float> { 141f, -17f }});
-        
-        possibleQueuePlaces.Add("first_queue", new List<List<float>> { new List<float> { 147f, -2f }, new List<float> { 146, -5f }, new List<float> { 147f, -4f }, new List<float> { 146f, -9f }, new List<float> { 144f, -13f } });
+        possibleIncomingRoutes.Add("first_queue", new List<List<float>> { new List<float>{ 141f, -22f }, new List<float> { 142f, -19f }, new List<float> { 143f, -16f }});
+        // possibleIncomingRoutes.Add("second_queue",
+        // possibleIncomingRoutes.Add("third_queue",
+        // possibleIncomingRoutes.Add("fourth_queue",
+
+        possibleQueuePlaces.Add("first_queue", new List<List<float>> { new List<float> { 150f, 2f }, new List<float> { 149, -2f }, new List<float> { 147f, -6f }, new List<float> { 146f, -9f }, new List<float> { 145f, -13f } });
+        // possibleQueuePlaces.Add("second_queue",
+        // possibleQueuePlaces.Add("third_queue",
+        // possibleQueuePlaces.Add("fourth_queue",
+
+        // possibleExitingRoutes.Add("first_queue",   SHOULD BE 9 SPOTS!
+        // possibleExitingRoutes.Add("second_queue",
+        // possibleExitingRoutes.Add("third_queue",
+        // possibleExitingRoutes.Add("fourth_queue",
 
         queueIncomingRoute = possibleIncomingRoutes[gameObject.name];
 
         queuePlaces = possibleQueuePlaces[gameObject.name];
     }
 
-    // new attribute mimicing data type "queue".
-    // [dweller1, dweller2]
-    // queue place = index
-
-    // On construct
-    // Get route flag from SecondLevelScript and assign queue values for each route
-
-
-    public void AddDweller()
+    public int AddDweller(GameObject incomingDweller)
     {
-        // add new dweller into queue (data type object, [])
+        dwellersInQueue.Add(incomingDweller);
 
-        // if queue is empty - new dweller is on firsst place
-        // if there is one dweller already - new dweller is second
-        // once first dweller is served - he pops out from HEAD and second dweller becomes first
+        return dwellersInQueue.IndexOf(incomingDweller);
     }
 
     public void RemoveDweller()
     {
-        // remove exiting dweller from the queue
+        dwellersInQueue.RemoveAt(0);
+        for (var i = 0; i < dwellersInQueue.Count; i++)
+        {
+            dwellersInQueue[i].GetComponent<SecondLevelDwellerScript>().setPlaceInQueue(i);
+        }
     }
 
     public void ServeDweller()
     {
-        // find [0] dweller (currently waiting)
-        // tell him to change state to "isServed"
+        dwellersInQueue[0].GetComponent<SecondLevelDwellerScript>().servingDweller();
+
+        if (!dwellersInQueue[0].GetComponent<SecondLevelDwellerScript>().isStuck)
+        {
+            RemoveDweller();
+        }   
     }
 
     public void AskToLeave()
     {
-        // find [0] dweller
-        // tell him to change state to "isStuck"
+        dwellersInQueue[0].GetComponent<SecondLevelDwellerScript>().unstuckDweller();
+        RemoveDweller();
     }
 
 
