@@ -19,7 +19,7 @@ public class DwellersQueue : MonoBehaviour
     {
         possibleIncomingRoutes.Add("first_queue", new List<List<float>> { new List<float>{ 138f, -23f }, new List<float> { 140f, -20f }, new List<float> { 141f, -17f }});
         
-        possibleQueuePlaces.Add("first_queue", new List<List<float>> { new List<float> { 147f, -2f }, new List<float> { 146, -5f }, new List<float> { 145f, -8f }, new List<float> { 144f, -10f }, new List<float> { 142f, -13f } });
+        possibleQueuePlaces.Add("first_queue", new List<List<float>> { new List<float> { 147f, -2f }, new List<float> { 146, -5f }, new List<float> { 147f, -4f }, new List<float> { 146f, -9f }, new List<float> { 144f, -13f } });
 
         queueIncomingRoute = possibleIncomingRoutes[gameObject.name];
 
