@@ -13,6 +13,8 @@ public class StatesManager : MonoBehaviour
     public static bool wasCutScn;
     public static string wasState;
 
+    
+
     public static void Initiate()
     {
         //Defining all possible states

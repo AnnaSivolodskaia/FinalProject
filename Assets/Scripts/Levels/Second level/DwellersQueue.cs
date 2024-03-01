@@ -18,11 +18,14 @@ public class DwellersQueue : MonoBehaviour
     private void OnEnable()
     {
         possibleIncomingRoutes.Add("first_queue", new List<List<float>> { new List<float>{ 141f, -22f }, new List<float> { 142f, -19f }, new List<float> { 143f, -16f }});
-        // possibleIncomingRoutes.Add("second_queue",
+        possibleIncomingRoutes.Add("second_queue", new List<List<float>> { new List<float> { 138f, -19f }, new List<float> { 138f, -16f }, new List<float> { 140f, -14f } });
         // possibleIncomingRoutes.Add("third_queue",
         // possibleIncomingRoutes.Add("fourth_queue",
 
+
         possibleQueuePlaces.Add("first_queue", new List<List<float>> { new List<float> { 150f, 2f }, new List<float> { 149, -2f }, new List<float> { 147f, -6f }, new List<float> { 146f, -9f }, new List<float> { 145f, -13f } });
+        possibleQueuePlaces.Add("second_queue", new List<List<float>> { new List<float> { 145f, 4f }, new List<float> { 145, 0f }, new List<float> { 143f, -5f }, new List<float> { 142f, -8f }, new List<float> { 140f, -12f } });
+
         // possibleQueuePlaces.Add("second_queue",
         // possibleQueuePlaces.Add("third_queue",
         // possibleQueuePlaces.Add("fourth_queue",

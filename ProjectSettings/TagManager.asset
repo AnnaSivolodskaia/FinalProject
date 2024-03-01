@@ -19,6 +19,7 @@ TagManager:
   - second_queue
   - third_queue
   - fourth_queue
+  - secondLevelCrate
   layers:
   - Default
   - TransparentFX

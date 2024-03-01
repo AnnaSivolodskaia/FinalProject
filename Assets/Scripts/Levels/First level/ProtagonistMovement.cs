@@ -10,7 +10,13 @@ public class ProtagonistMovement : MonoBehaviour
     public float rotateSpeed;
     public Animator animator;
     public string currentLevel;
-    public bool isCarryingBox;
+    public bool isCarryingBox = false;
+    public bool isMovingCarrying;
+    public GameObject crate;
+    public GameObject closestCrate;
+
+    public GameObject[] cratesOnLevel;
+
 
     private void Start()
     {
@@ -25,7 +31,7 @@ public class ProtagonistMovement : MonoBehaviour
             gameObject.transform.position = new Vector3(120.81f, 22f, 65.89f);
         } else if (currentLevel == "2lvl_1")
         {
-            gameObject.transform.position = new Vector3(140.7613f, 21.499f, 1.392069f);
+            gameObject.transform.position = new Vector3(144f, 21.499f, 8f);
         }
     }
 
@@ -66,12 +72,11 @@ public class ProtagonistMovement : MonoBehaviour
         {
             //trigger walking animation
             animator.SetBool("Moving", true);
-
-           /* Vector3 newPosition = transform.position + transform.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime;
-            if (IsPositionWithinBounds(newPosition))*/
+            /* Vector3 newPosition = transform.position + transform.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime;
+             if (IsPositionWithinBounds(newPosition))*/
             //{
-                // Move within bounds
-                transform.Translate(Vector3.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime);
+            // Move within bounds
+            transform.Translate(Vector3.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime);
             //}
             //movement
             //transform.Translate(Vector3.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime);
@@ -79,11 +84,7 @@ public class ProtagonistMovement : MonoBehaviour
         else
         {
             //stop walking
-            animator.SetBool("Moving", false);
-            //if(is carying box)
-            //{one animation} else {
-            //another animation}
-            //same for idle pose 
+            animator.SetBool("Moving", false);     
         }
     }
 
@@ -93,6 +94,36 @@ public class ProtagonistMovement : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput).normalized;
+        if (Input.GetKeyDown(KeyCode.C) && !isCarryingBox)
+        {
+            cratesOnLevel = GameObject.FindGameObjectsWithTag("secondLevelCrate");
+
+            if (cratesOnLevel != null)
+            {
+                closestCrate = null;
+                float closestDistance = float.MaxValue;
+
+                foreach (GameObject availableCrate in cratesOnLevel)
+                {
+                    if (availableCrate != null)
+                    {
+                        float distanceToCrate = Vector3.Distance(transform.position, availableCrate.transform.position);
+
+                        if (distanceToCrate < closestDistance && distanceToCrate <= 2f)
+                        {
+                            closestCrate = availableCrate;
+                            closestDistance = distanceToCrate;
+                        }
+                    }
+                }
+
+                if (closestCrate != null)
+                {
+                    handleCrate();
+                    Destroy(closestCrate);
+                }
+            }
+        }
 
         if (movement != Vector3.zero)
         {
@@ -105,28 +136,39 @@ public class ProtagonistMovement : MonoBehaviour
 
 
 
+
             // Trigger walking animation
             animator.SetBool("Moving", true);
+            transform.Translate(Vector3.forward * movement.magnitude * movementSpeed * Time.deltaTime);
+
+            
+            //animator.SetBool("IsCarryingBox", true);
+            //animator.SetBool("isMovingCarrying", true);
 
             // Move in the specified direction
-            transform.Translate(Vector3.forward * movement.magnitude * movementSpeed * Time.deltaTime);
         }
         else
         {
             // Stop walking
             animator.SetBool("Moving", false);
+
+
+            //animator.SetBool("IsCarryingBox", false);
+            //animator.SetBool("isMovingCarrying", false);
+
+
+            //if(is carying box)
+            //{one animation} else {
+            //another animation}
+            //same for idle pose 
         }
 
     }
 
-    private bool IsPositionWithinBounds(Vector3 position)
+    public void handleCrate()
     {
-        // Define your bounds or limit here
-        float minX = 18f;
-        float maxX = -1f;
-
-        // Check if the position is within the bounds on the x-axis only
-        return position.x >= minX && position.x <= maxX;
+        animator.SetBool("IsCarryingBox", !animator.GetBool("IsCarryingBox"));
+        crate.SetActive(!crate.activeSelf);
+        isCarryingBox = !isCarryingBox;
     }
-
 }

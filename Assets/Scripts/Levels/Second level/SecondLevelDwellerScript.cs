@@ -58,6 +58,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
     public void unstuckDweller()
     {
         isStuck = false;
+        defineNextAction();
     }
 
     public void setPlaceInQueue(int index)
@@ -94,10 +95,15 @@ public class SecondLevelDwellerScript : MonoBehaviour
             // trigger "idle" animation 
         }
 
-        if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+        if (IsInRadius() && Input.GetKeyDown(KeyCode.C) && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox)
         {
             DwellerQueue.GetComponent<DwellersQueue>().ServeDweller();
-            // drop the crate function
+            protagonist.GetComponent<ProtagonistMovement>().handleCrate();    
+        }
+
+        if( IsInRadius() && Input.GetKeyDown(KeyCode.X) && isStuck)
+        {
+            isStuck = false;
         }
     }
 
