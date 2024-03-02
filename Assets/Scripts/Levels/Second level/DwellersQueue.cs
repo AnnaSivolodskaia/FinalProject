@@ -17,27 +17,26 @@ public class DwellersQueue : MonoBehaviour
 
     private void OnEnable()
     {
-        possibleIncomingRoutes.Add("first_queue", new List<List<float>> { new List<float>{ 141f, -22f }, new List<float> { 142f, -19f }, new List<float> { 143f, -16f }});
-        possibleIncomingRoutes.Add("second_queue", new List<List<float>> { new List<float> { 138f, -19f }, new List<float> { 138f, -16f }, new List<float> { 140f, -14f } });
-        // possibleIncomingRoutes.Add("third_queue",
-        // possibleIncomingRoutes.Add("fourth_queue",
+        possibleIncomingRoutes.Add("first_queue", new List<List<float>> { new List<float>{ 167f, 1f }, new List<float> { 162f, -12f }, new List<float> { 149f, -9f }});
+        possibleIncomingRoutes.Add("second_queue", new List<List<float>> { new List<float> { 132f, -36f }, new List<float> { 134f, -25f }, new List<float> { 138f, -16f } });
+        possibleIncomingRoutes.Add("third_queue", new List<List<float>> { new List<float> { 107f, -7f }, new List<float> { 123f, -10f }, new List<float> { 128f, -12f } });
+        possibleIncomingRoutes.Add("fourth_queue", new List<List<float>> { new List<float> { 107f, -7f }, new List<float> { 123f, -10f }, new List<float> { 128f, -12f } });
 
+        possibleQueuePlaces.Add("first_queue", new List<List<float>> { new List<float> { 149f, 1f }, new List<float> { 148f, -2f }, new List<float> { 147f, -6f }, new List<float> { 145f, -10f }, new List<float> { 144f, -13f } });
+        possibleQueuePlaces.Add("second_queue", new List<List<float>> { new List<float> { 145f, 4f }, new List<float> { 144, 2f }, new List<float> { 143f, -1f }, new List<float> { 142f, -4f }, new List<float> { 141f, -7f } });
+        possibleQueuePlaces.Add("third_queue", new List<List<float>> { new List<float> { 140f, 5f }, new List<float> { 139, 2f }, new List<float> { 138f, -2f }, new List<float> { 137f, -5f }, new List<float> { 136f, -8f } });
+        possibleQueuePlaces.Add("fourth_queue", new List<List<float>> { new List<float> { 136f, 7f }, new List<float> { 134, 3.5f }, new List<float> { 133.5f, 0f }, new List<float> { 132f, -3.5f }, new List<float> { 131f, -6f } });
 
-        possibleQueuePlaces.Add("first_queue", new List<List<float>> { new List<float> { 150f, 2f }, new List<float> { 149, -2f }, new List<float> { 147f, -6f }, new List<float> { 146f, -9f }, new List<float> { 145f, -13f } });
-        possibleQueuePlaces.Add("second_queue", new List<List<float>> { new List<float> { 145f, 4f }, new List<float> { 145, 0f }, new List<float> { 143f, -5f }, new List<float> { 142f, -8f }, new List<float> { 140f, -12f } });
-
-        // possibleQueuePlaces.Add("second_queue",
-        // possibleQueuePlaces.Add("third_queue",
-        // possibleQueuePlaces.Add("fourth_queue",
-
-        // possibleExitingRoutes.Add("first_queue",   SHOULD BE 9 SPOTS!
-        // possibleExitingRoutes.Add("second_queue",
-        // possibleExitingRoutes.Add("third_queue",
-        // possibleExitingRoutes.Add("fourth_queue",
+        possibleExitingRoutes.Add("first_queue", new List<List<float>> { new List<float> { 153f, 0f }, new List<float> { 160f, 1f }, new List<float> { 165f, 5f }, new List<float> { 163f, 9f }, new List<float> { 161f, 13f }, new List<float> { 159f, 18f }, new List<float> { 155f, 22f } });
+        possibleExitingRoutes.Add("second_queue", new List<List<float>> { new List<float> { 143f, 4f }, new List<float> { 141f, -2f }, new List<float> { 138f, -10f }, new List<float> { 135f, -17f }, new List<float> { 121f, -31f }, new List<float> { 112f, -27f }, new List<float> { 105f, -26f } });
+        possibleExitingRoutes.Add("third_queue", new List<List<float>> { new List<float> { 143f, 4f }, new List<float> { 141f, -2f }, new List<float> { 138f, -10f }, new List<float> { 135f, -17f }, new List<float> { 121f, -31f }, new List<float> { 112f, -27f }, new List<float> { 105f, -26f } });
+        possibleExitingRoutes.Add("fourth_queue", new List<List<float>> { new List<float> { 132f, 8f }, new List<float> { 132f, 13f }, new List<float> { 132f, 18f }, new List<float> { 132f, 22f }, new List<float> { 132f, 26f }, new List<float> { 132f, 29f } });
 
         queueIncomingRoute = possibleIncomingRoutes[gameObject.name];
 
         queuePlaces = possibleQueuePlaces[gameObject.name];
+
+        queueExitingRoute = possibleExitingRoutes[gameObject.name];
     }
 
     public int AddDweller(GameObject incomingDweller)

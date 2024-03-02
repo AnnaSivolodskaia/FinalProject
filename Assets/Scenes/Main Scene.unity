@@ -10956,6 +10956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 365475927}
+  - component: {fileID: 365475928}
   m_Layer: 0
   m_Name: line 1
   m_TagString: Untagged
@@ -11002,6 +11003,20 @@ Transform:
   m_Father: {fileID: 1931986467}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &365475928
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365475926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &366318617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28583,7 +28598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896736129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 144.14, y: 20.99, z: 8.35}
+  m_LocalPosition: {x: 140, y: 20.99, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36097,6 +36112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1150501614}
+  - component: {fileID: 1150501615}
   m_Layer: 0
   m_Name: line 2
   m_TagString: Untagged
@@ -36143,6 +36159,20 @@ Transform:
   m_Father: {fileID: 1931986467}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1150501615
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150501613}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1151137604 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1498041528017854, guid: 0ba258545da721e488ecb71ffd143b6f, type: 3}
@@ -36978,8 +37008,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.020000001, y: 0.00532684, z: 0.005990681}
-  m_Center: {x: 0, y: 0, z: 0.000000007450581}
+  m_Size: {x: 0.020000001, y: 0.00532684, z: 0.0054589794}
+  m_Center: {x: -4.549359e-12, y: 0, z: 0.0002658579}
 --- !u!1 &1190208934
 GameObject:
   m_ObjectHideFlags: 0
@@ -39296,6 +39326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1259112467}
+  - component: {fileID: 1259112468}
   m_Layer: 0
   m_Name: line 1 (1)
   m_TagString: Untagged
@@ -39342,6 +39373,20 @@ Transform:
   m_Father: {fileID: 1931986467}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1259112468
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259112466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &1260157059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55767,13 +55812,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dwellerList: []
-  fox: {fileID: 8981725138495439940, guid: df779f11fd2e2204abbcabca5244d2dd, type: 3}
-  racoon: {fileID: 8055000537363878067, guid: c5176087637d8d14c97de7189311ac0d, type: 3}
-  tom: {fileID: 3206854730423055018, guid: 4c79db2a42014484c8ff96cd30430fa5, type: 3}
-  cat: {fileID: 3951328292737725753, guid: 125f2eb5fe2d1ff4185e8106cd033995, type: 3}
-  frog: {fileID: 4990705750649443888, guid: 7e55f3a22db545e41b0bbe18e3dfc8de, type: 3}
-  fenneko: {fileID: 5628456944595839482, guid: 23277a650d3f29645887b3b2ad27fa75, type: 3}
-  retsuko: {fileID: 8453287002183519160, guid: db6f6295cb4fc3848bd53ca2cd4e1daf, type: 3}
+  fox: {fileID: 8277233832912629579, guid: 62e4f0c27c23d864d8b9c9929884b467, type: 3}
+  racoon: {fileID: 1640952087773674569, guid: 8fb12032090eedd41a0c27a497be2534, type: 3}
+  tom: {fileID: 8407945922413074891, guid: 6b3a0c4844e5edb43b1aae91fbbb918b, type: 3}
+  cat: {fileID: 4231773029628498128, guid: 7128a36a36677724398e5c68f0181057, type: 3}
+  frog: {fileID: 3060961224573501267, guid: fdb0694c97c19c04cb503ea2524e04e8, type: 3}
+  fenneko: {fileID: 2403124672672044241, guid: 3f975f1eb459c7143bf807905db3b282, type: 3}
+  retsuko: {fileID: 531574102361656202, guid: e255633dc3231114882e98302e1bda03, type: 3}
   crateModel: {fileID: 1979077439339147191, guid: fe480f325759aa748bb0a5b41a935826, type: 3}
 --- !u!1001 &1803835617
 PrefabInstance:
@@ -65891,8 +65936,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.7896705, z: 15.076992}
-  m_Center: {x: -0.000019926452, y: 2.3027732, z: 6.0068884}
+  m_Size: {x: 0.57092315, y: 2.7896705, z: 14.812897}
+  m_Center: {x: -0.21455811, y: 2.3027697, z: 5.8748364}
 --- !u!1 &2116848452
 GameObject:
   m_ObjectHideFlags: 0
@@ -68320,8 +68365,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.020000001, y: 0.00532684, z: 0.005990681}
-  m_Center: {x: 0, y: 0, z: 0.000000007450581}
+  m_Size: {x: 0.020000001, y: 0.00532684, z: 0.0054827505}
+  m_Center: {x: -5.2353885e-12, y: 0, z: 0.0002539727}
 --- !u!1 &2418263029241306883 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5928709817527177071, guid: 05a926d0f05917c419b476866d433a17, type: 3}

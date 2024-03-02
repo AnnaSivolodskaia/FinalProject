@@ -34,13 +34,24 @@ public class SecondLevelScript : MonoBehaviour
         // 3. Start Dwellers spawner
 
         // Defining dwellers to be spawned on the level
-        possibleSpawnSpots = new List<List<float>> { new List<float> { 140f, -21f }  };
-        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: fox, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
-        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: racoon, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
-        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: frog, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
-        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: tom, _spawnPoint: 0, _parentQueue: "second_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
-        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: retsuko, _spawnPoint: 0, _parentQueue: "second_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
-        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 5, _dwellerModel: racoon, _spawnPoint: 0, _parentQueue: "second_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+
+        //first spawn point set
+        possibleSpawnSpots = new List<List<float>> { new List<float> { 176f, 3f }, new List<float> { 147f, -59f }, new List<float> { 103f, -17f }, new List<float> { 103f, -17f } };
+
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: frog, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: frog, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fox, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 100, _isServed: false, _isStuck: true));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: retsuko, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 100, _isServed: false, _isStuck: true));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: true));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 100, _isServed: false, _isStuck: true));
+
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: retsuko, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fenneko, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fox, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
+        dwellerList.Add(new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fenneko, _spawnPoint: 4, _parentQueue: "fourth_queue", _patienceCapacity: 100, _isServed: false, _isStuck: false));
 
 
         DwellerSpawner();

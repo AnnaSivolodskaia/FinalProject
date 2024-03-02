@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SecondLevelDwellerScript : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
     public void servingDweller()
     {
         isServed = true;
+        defineNextAction();
     }
 
     public void unstuckDweller()
@@ -63,9 +65,8 @@ public class SecondLevelDwellerScript : MonoBehaviour
 
     public void setPlaceInQueue(int index)
     {
-        // Debug.Log("Changing place in queue from " + placeInQueue + " to " + index);
         placeInQueue = index;
-        // Debug.Log("New place in queue: " + placeInQueue);
+        defineNextAction();
     }
 
     public void SetRoutes(string parentQueue)
@@ -90,20 +91,23 @@ public class SecondLevelDwellerScript : MonoBehaviour
         if (isMoving)
         {
             DwellerMovement(currentTravelSpotCoordinates);
+            GetComponent<Animator>().SetBool("IsMoving", true);
         } else
         {
             // trigger "idle" animation 
+            GetComponent<Animator>().SetBool("IsMoving", false);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 20f, 0f)), 1f);
         }
 
         if (IsInRadius() && Input.GetKeyDown(KeyCode.C) && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox)
         {
             DwellerQueue.GetComponent<DwellersQueue>().ServeDweller();
-            protagonist.GetComponent<ProtagonistMovement>().handleCrate();    
+            protagonist.GetComponent<ProtagonistMovement>().handleCrate();
         }
 
         if( IsInRadius() && Input.GetKeyDown(KeyCode.X) && isStuck)
         {
-            isStuck = false;
+            DwellerQueue.GetComponent<DwellersQueue>().AskToLeave();
         }
     }
 
@@ -143,7 +147,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
         }
         else if (isExiting)
         {
-            if (currentTravelSpotIndex < 8)
+            if (currentTravelSpotIndex < queueExitingRoute.Count)
             {
                 currentTravelSpotIndex += 1;
                 currentTravelSpotCoordinates = queueExitingRoute[currentTravelSpotIndex];
@@ -182,7 +186,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
         // Move towards the target position
         transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
 
-        if (Math.Round(gameObject.transform.position.x, 2) == locX && Math.Round(gameObject.transform.position.z, 2) == locZ)
+        if (Math.Round(gameObject.transform.position.x, 1) == Math.Round(locX, 1) && Math.Round(gameObject.transform.position.z, 1) == Math.Round(locZ, 1))
         {
             // Debug.Log("Travel point reached, NEXT ACTION!");
             defineNextAction();
