@@ -12,6 +12,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 603f502561925be4493e8a7d581d8ff5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 603f502561925be4493e8a7d581d8ff5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 603f502561925be4493e8a7d581d8ff5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 603f502561925be4493e8a7d581d8ff5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.152679
       objectReference: {fileID: 0}
@@ -90,14 +102,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4990705750649443888}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &2039827993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,8 +121,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.3877811, z: 1}
-  m_Center: {x: 0, y: 1.0570536, z: 0}
+  m_Size: {x: 1.3283107, y: 2.3877807, z: 1.0951983}
+  m_Center: {x: -0.017810287, y: 1.0570536, z: 0.03761884}
 --- !u!95 &570673509485159434
 Animator:
   serializedVersion: 5
@@ -121,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 4990705750649443888}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 05802bee2ad021d49b2ebc31e3efa636, type: 2}
+  m_Controller: {fileID: 9100000, guid: 57fa55803e750334d80bec030b31e910, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -154,3 +166,4 @@ MonoBehaviour:
   isMoving: 0
   incomingRouteFinished: 0
   isExiting: 0
+  protagonist: {fileID: 0}

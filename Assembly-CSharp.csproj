@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Levels\First level\Litter.cs" />
     <Compile Include="Assets\Scripts\Levels\Second level\SecondLevelScript.cs" />
     <Compile Include="Assets\Scripts\Global\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\Levels\Second level\PatienceMetetScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryWearLogic.cs" />
   </ItemGroup>
   <ItemGroup>

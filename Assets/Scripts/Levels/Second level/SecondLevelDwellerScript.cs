@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using System.Threading.Tasks;
 
 public class SecondLevelDwellerScript : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class SecondLevelDwellerScript : MonoBehaviour
     // Dweller movement
     // call-backs to queue script to initiate events (add/remove dweller)
     // Patience count-down
+
+    public GameObject patienceMeter;
 
     public float movementSpeed = 1f;
 
@@ -47,29 +51,38 @@ public class SecondLevelDwellerScript : MonoBehaviour
 
         protagonist = GameObject.Find("SecondLevelProtagonist");
 
+        patienceMeter = transform.GetChild(0).gameObject;
+
         SetRoutes(parentQueue);
     }
 
     public void servingDweller()
     {
         isServed = true;
+        defineNextAction();
+    }
+
+    public void LeavingDweller()
+    {
+        isExiting = true;
+        DwellerQueue.DwellerGaveUp();
+        defineNextAction();
     }
 
     public void unstuckDweller()
     {
         isStuck = false;
+        defineNextAction();
     }
 
     public void setPlaceInQueue(int index)
     {
-        // Debug.Log("Changing place in queue from " + placeInQueue + " to " + index);
         placeInQueue = index;
-        // Debug.Log("New place in queue: " + placeInQueue);
+        defineNextAction();
     }
 
     public void SetRoutes(string parentQueue)
     {
-        Debug.Log("SetRoutes parentQueue = " + parentQueue);
         DwellerQueue = GameObject.Find(parentQueue).GetComponent<DwellersQueue>();
 
         incomingTravelRoute = DwellerQueue.queueIncomingRoute;
@@ -77,8 +90,6 @@ public class SecondLevelDwellerScript : MonoBehaviour
         queueExitingRoute = DwellerQueue.queueExitingRoute;
 
         currentTravelSpotIndex = 0;
-        Debug.Log("first queue incoming route len: " + incomingTravelRoute.Count);
-        Debug.Log("first spot incoming route len: " + incomingTravelRoute[currentTravelSpotIndex].Count);
         currentTravelSpotCoordinates = incomingTravelRoute[currentTravelSpotIndex];
 
         isMoving = true;
@@ -86,18 +97,31 @@ public class SecondLevelDwellerScript : MonoBehaviour
 
     private void Update()
     {
+        if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
+        {
+            DestroyDweller();
+        }
+
         if (isMoving)
         {
             DwellerMovement(currentTravelSpotCoordinates);
+            GetComponent<Animator>().SetBool("IsMoving", true);
         } else
         {
             // trigger "idle" animation 
+            GetComponent<Animator>().SetBool("IsMoving", false);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 20f, 0f)), 1f);
         }
 
-        if (IsInRadius() && Input.GetKeyDown(KeyCode.Z))
+        if (IsInRadius() && Input.GetKeyDown(KeyCode.C) && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox)
         {
             DwellerQueue.GetComponent<DwellersQueue>().ServeDweller();
-            // drop the crate function
+            protagonist.GetComponent<ProtagonistMovement>().HandleCrate();
+        }
+
+        if( IsInRadius() && Input.GetKeyDown(KeyCode.X) && isStuck)
+        {
+            DwellerQueue.GetComponent<DwellersQueue>().AskToLeave();
         }
     }
 
@@ -123,7 +147,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
             currentTravelSpotIndex = 4;
             currentTravelSpotCoordinates = queuePlacesSpots[currentTravelSpotIndex];
         }
-        else if (!isServed)
+        else if (!isServed && !isExiting)
         {
             if(placeInQueue < currentTravelSpotIndex)
             {
@@ -133,11 +157,16 @@ public class SecondLevelDwellerScript : MonoBehaviour
             else if (placeInQueue == currentTravelSpotIndex)
             {
                 isMoving = false;
+                if (placeInQueue == 0)
+                {
+                    patienceMeter.SetActive(true);
+                    patienceMeter.GetComponent<PatienceMetetScript>().PatienceCountDown(patienceCapacity);
+                }
             }
         }
         else if (isExiting)
         {
-            if (currentTravelSpotIndex < 8)
+            if (currentTravelSpotIndex < queueExitingRoute.Count-1)
             {
                 currentTravelSpotIndex += 1;
                 currentTravelSpotCoordinates = queueExitingRoute[currentTravelSpotIndex];
@@ -146,6 +175,10 @@ public class SecondLevelDwellerScript : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+        else if (isServed && isStuck)
+        {
+            isMoving = false;
         }
         else if(isServed && !isStuck)
         {
@@ -176,10 +209,30 @@ public class SecondLevelDwellerScript : MonoBehaviour
         // Move towards the target position
         transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
 
-        if (Math.Round(gameObject.transform.position.x, 2) == locX && Math.Round(gameObject.transform.position.z, 2) == locZ)
+        if (Math.Round(gameObject.transform.position.x, 1) == Math.Round(locX, 1) && Math.Round(gameObject.transform.position.z, 1) == Math.Round(locZ, 1))
         {
-            // Debug.Log("Travel point reached, NEXT ACTION!");
             defineNextAction();
+        }
+    }
+
+    public async void DestroyDweller()
+    {
+        await StandardWait(1.5f);
+        try
+        {
+            Destroy(gameObject);
+        }
+        catch (Exception){ } 
+    }
+
+    private async Task StandardWait(float time)
+    {
+        float startTime = Time.time;
+        float currentTime = startTime;
+        while (currentTime - startTime < time)
+        {
+            currentTime += Time.deltaTime;
+            await Task.Yield();
         }
     }
 }

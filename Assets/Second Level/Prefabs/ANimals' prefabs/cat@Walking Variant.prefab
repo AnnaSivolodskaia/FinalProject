@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 844d277c942a86c43883c3ab1434e216, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 844d277c942a86c43883c3ab1434e216, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 844d277c942a86c43883c3ab1434e216, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 844d277c942a86c43883c3ab1434e216, type: 3}
       propertyPath: m_LocalPosition.x
@@ -94,14 +94,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3951328292737725753}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &1325317453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -113,8 +113,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3.8650665, z: 1}
-  m_Center: {x: 0, y: 2.0397682, z: 0}
+  m_Size: {x: 1.7839762, y: 4.0599136, z: 1.3711826}
+  m_Center: {x: -0.04904637, y: 1.9423449, z: 0.109978415}
 --- !u!95 &1325317454
 Animator:
   serializedVersion: 5
@@ -125,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 3951328292737725753}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e3409ed7c3428374296e9c556d22fbf5, type: 2}
+  m_Controller: {fileID: 9100000, guid: b357a8d60804d6a4abf49e91ae8bc4f7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -158,3 +158,4 @@ MonoBehaviour:
   isMoving: 0
   incomingRouteFinished: 0
   isExiting: 0
+  protagonist: {fileID: 0}

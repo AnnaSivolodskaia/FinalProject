@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class DwellerScript : MonoBehaviour
 {
@@ -87,7 +89,7 @@ public class DwellerScript : MonoBehaviour
     {
         if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
         {
-            Destroy(gameObject);
+            DestroyDweller();
         }
 
         if(currentTravelSpot == travelRoute.Count)
@@ -122,6 +124,26 @@ public class DwellerScript : MonoBehaviour
         if(Mathf.Round(gameObject.transform.position.x) == locX && Mathf.Round(gameObject.transform.position.z) == locZ)
         {
            currentTravelSpot += 1;
+        }
+    }
+
+    public async void DestroyDweller()
+    {
+        await StandardWait(1.5f);
+        try
+        {
+            Destroy(gameObject);
+        }
+        catch (Exception) { }
+    }
+    private async Task StandardWait(float time)
+    {
+        float startTime = Time.time;
+        float currentTime = startTime;
+        while (currentTime - startTime < time)
+        {
+            currentTime += Time.deltaTime;
+            await Task.Yield();
         }
     }
 }

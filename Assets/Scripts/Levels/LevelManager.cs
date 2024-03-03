@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.Threading.Tasks;
 using static CameraManager;
+using Newtonsoft.Json.Utilities;
 
 public class LevelManager : MonoBehaviour
 {
@@ -34,11 +36,11 @@ public class LevelManager : MonoBehaviour
 
         FindGameObject(StatesManager.gameStates[level].stateName).SetActive(true);
     }
-    public static void UnloadLevel(string level)
+    public static async void UnloadLevel(string level)
     {
+        await StandardWait(1.5f);
         FindGameObject(StatesManager.gameStates[level].stateName).SetActive(false);
     }
-
 
     public static void LoadOutro()
     {
@@ -84,5 +86,16 @@ public class LevelManager : MonoBehaviour
 
         return returnObject;
         
+    }
+
+    private static async Task StandardWait(float time)
+    {
+        float startTime = Time.time;
+        float currentTime = startTime;
+        while (currentTime - startTime < time)
+        {
+            currentTime += Time.deltaTime;
+            await Task.Yield();
+        }
     }
 }

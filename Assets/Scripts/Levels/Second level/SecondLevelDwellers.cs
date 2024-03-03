@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SecondLevelDwellers : MonoBehaviour
+public class SecondLevelDwellers// : MonoBehaviour
 {
     public GameObject dwellerModel;
     public int spawnPoint;

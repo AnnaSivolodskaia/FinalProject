@@ -323,7 +323,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4166898503961257888, guid: 92edb380bd29fc944b8a739651478eb6, type: 3}
       propertyPath: m_Name
-      value: fish_box
+      value: fish_box Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166898503961257888, guid: 92edb380bd29fc944b8a739651478eb6, type: 3}
+      propertyPath: m_TagString
+      value: secondLevelCrate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92edb380bd29fc944b8a739651478eb6, type: 3}
@@ -332,6 +336,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3645695441351736602, guid: 92edb380bd29fc944b8a739651478eb6, type: 3}
   m_PrefabInstance: {fileID: 2496353665560545303}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1979077439339147191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4166898503961257888, guid: 92edb380bd29fc944b8a739651478eb6, type: 3}
+  m_PrefabInstance: {fileID: 2496353665560545303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &-5659417633774946089
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979077439339147191}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &3455915240508517056
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979077439339147191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.993082, y: 9.880002, z: 14.489801}
+  m_Center: {x: -0.4909261, y: 3.8806343, z: -1.1393881}
 --- !u!1001 &2496353665841630113
 PrefabInstance:
   m_ObjectHideFlags: 0
