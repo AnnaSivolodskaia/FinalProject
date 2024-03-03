@@ -547,6 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9178f3d2320054ca9d8f82b0175ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patienceMeter: {fileID: 0}
   movementSpeed: 3
   parentQueue: 
   patienceCapacity: 0
@@ -1112,6 +1113,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3598824199757859434}
     m_Modifications:
+    - target: {fileID: 7395141092766888964, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395141092766888964, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395141092766888964, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7395141093727728913, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1200,13 +1213,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatienceMeter
       objectReference: {fileID: 0}
-    - target: {fileID: 7395141094083104348, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 7395141093727728917, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7395141094083104348, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395141094083104348, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
