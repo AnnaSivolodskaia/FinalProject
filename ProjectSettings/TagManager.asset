@@ -20,6 +20,8 @@ TagManager:
   - third_queue
   - fourth_queue
   - secondLevelCrate
+  - CreditsCanvas
+  - MainMenuCanvas
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - PauseManuLayer
   - 
   - 
   - 

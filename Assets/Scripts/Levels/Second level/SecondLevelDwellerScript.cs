@@ -168,8 +168,8 @@ public class SecondLevelDwellerScript : MonoBehaviour
         {
             if (currentTravelSpotIndex < queueExitingRoute.Count-1)
             {
-                currentTravelSpotIndex += 1;
                 currentTravelSpotCoordinates = queueExitingRoute[currentTravelSpotIndex];
+                currentTravelSpotIndex += 1;
             }
             else
             {

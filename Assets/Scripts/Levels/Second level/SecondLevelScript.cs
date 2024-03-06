@@ -34,6 +34,8 @@ public class SecondLevelScript : MonoBehaviour
     public int score;
     public TextMeshProUGUI lostDwellersText;
     public int lostDwellers;
+    public Animator scoreCanvasAnimator;
+
 
 
 
@@ -45,6 +47,8 @@ public class SecondLevelScript : MonoBehaviour
         allDwellersSpawned = false;
         levelCompleted = false;
         levelIsDisabling = false;
+        scoreCanvasAnimator.SetBool("Disabled", false);
+
 
         // Dwellers spawn points
         possibleSpawnSpots = new List<List<float>> { new List<float> { 176f, 3f }, new List<float> { 147f, -59f }, new List<float> { 103f, -17f }, new List<float> { 103f, -17f } };
@@ -58,7 +62,7 @@ public class SecondLevelScript : MonoBehaviour
             new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fox, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 5, _isServed: false, _isStuck: false),
 
             new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 5, _isServed: false, _isStuck: true),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: retsuko, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 15, _isServed: false, _isStuck: true),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: racoon, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 15, _isServed: false, _isStuck: true),
             new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 15, _isServed: false, _isStuck: true),
             new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 15, _isServed: false, _isStuck: true),
 
@@ -187,18 +191,23 @@ public class SecondLevelScript : MonoBehaviour
 
     public void LevelFailed()
     {
+        scoreCanvasAnimator.SetBool("Disabled", true);
         StatesManager.NegativeGameProgression();
     }
 
     public void LevelSuccessed()
     {
         ScoreSystem.UpdateScore(score);
+        scoreCanvasAnimator.SetBool("Disabled", true);
         StatesManager.PositiveGameProgression();
     }
 
     private void OnDisable()
     {
+        scoreCanvasAnimator.SetBool("Disabled", true);
+        Debug.Log("Canvas disabled");
         Terminate();
+
     }
 
     public void Terminate()
@@ -207,6 +216,7 @@ public class SecondLevelScript : MonoBehaviour
         {
             Destroy(crate);
         }
+
         cratesListSpawnSpots = null;
         dwellerList = null;
         scoreText.text = null;

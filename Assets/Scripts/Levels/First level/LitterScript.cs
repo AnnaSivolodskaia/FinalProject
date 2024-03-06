@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using System;
+using static FirstLevelScript;
 
 public class LitterScript : MonoBehaviour
 {
     public GameObject protagonist;
     public Transform protagonistLoc;
+    //public Animator animator;
+
     private float detectionRadius = 2f;
     public GameObject plasticBin;
     public GameObject metalBin;
@@ -27,6 +30,9 @@ public class LitterScript : MonoBehaviour
         GameObject metalBin = GameObject.Find("MetalTrashBin");
         GameObject bioBin = GameObject.Find("BioTrashBin");
 
+        //animator = protagonist.GetComponent<Animator>();
+
+
         if (protagonist != null)
         {
             protagonistLoc = protagonist.transform;
@@ -36,12 +42,16 @@ public class LitterScript : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Z))
                     {
+                        //animator.SetBool("PickingUp", true);
+
                         FirstLevelScript.score += 10;
                         FirstLevelScript.bananasCollected += 1;
                         Shake(bioBin);
                         Destroy(gameObject);    
                     } else if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.C))
                     {
+                        //animator.SetBool("PickingUp", true);
+
                         FirstLevelScript.score += 5;
                         FirstLevelScript.mistakesMade += 1;
                         Shake(bioBin);
@@ -52,6 +62,8 @@ public class LitterScript : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.X))
                     {
+                        //animator.SetBool("PickingUp", true);
+
                         FirstLevelScript.score += 10;
                         FirstLevelScript.bottlesCollected += 1;
                         //shakes blue bin correctly
@@ -60,6 +72,8 @@ public class LitterScript : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.C))
                     {
+                        //animator.SetBool("PickingUp", true);
+
                         FirstLevelScript.score += 5;
                         FirstLevelScript.mistakesMade += 1;
                         Shake(plasticBin);
@@ -70,6 +84,7 @@ public class LitterScript : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.C))
                     {
+                        //animator.SetBool("PickingUp", true);
                         FirstLevelScript.score += 10;
                         FirstLevelScript.cansCollected += 1;
                         Shake(metalBin);
@@ -77,8 +92,9 @@ public class LitterScript : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X))
                     {
+                        //animator.SetBool("PickingUp", true);
                         FirstLevelScript.score += 5;
-                        FirstLevelScript.mistakesMade += 1;
+                        FirstLevelScript.mistakesMade = Math.Min(3, FirstLevelScript.mistakesMade + 1);
                         Shake(metalBin);
                         Destroy(gameObject);
                     }

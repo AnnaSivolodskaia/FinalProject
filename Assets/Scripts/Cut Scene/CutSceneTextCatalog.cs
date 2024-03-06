@@ -22,6 +22,9 @@ public class CutSceneTextCatalog : MonoBehaviour
             case "1lvl_2":
                 finalText = "Hey, big shoutout to you, my friend! Thanks to your help, our streets are looking squeaky clean now. I can't thank you enough for rolling up your sleeves and diving into the mess with us.\r\n\r\nThe village is already feeling fresher and more inviting, all thanks to your hard work. It's amazing what we can achieve when we team up, isn't it?\r\n";
                 break;
+            /*case "2lvl_1":
+                finalText = "Hey there, traveler! Thanks a ton for sticking around, your help means the world to me. Now, I've got another tiny favor to ask. I made a promise to the locals about some fresh fish, and we've got this sizable shipment waiting to be shared.\r\nIf you could spare a moment and lend a paw to get these fish to each citizen, it would be fantastic. Simply grab a box with 'C' and deliver it to them by hitting 'C' again.\r\nBut here's the thing – a few folks might be feeling extra hungry and ask for a second box. If that comes up, just press 'X' and kindly let them know we're sticking to one box per person. We want to make sure everyone gets a fair share.\r\nAlso, keep an eye on their emotions; hunger can make folks a tad impatient. Let's make sure no one leaves disappointed!\r\nI know it's a bit of a hustle, but your support will ensure that every villager gets to enjoy those delicious fresh fish. Ready to dive into this fishy business together?\r\n"
+                break;*/
             default:
                 finalText = "Not defined in catalog!";
                 break;

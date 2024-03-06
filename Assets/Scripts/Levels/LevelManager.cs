@@ -39,6 +39,7 @@ public class LevelManager : MonoBehaviour
     public static async void UnloadLevel(string level)
     {
         await StandardWait(1.5f);
+
         FindGameObject(StatesManager.gameStates[level].stateName).SetActive(false);
     }
 
