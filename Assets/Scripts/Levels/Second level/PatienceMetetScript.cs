@@ -142,6 +142,7 @@ public class PatienceMetetScript : MonoBehaviour
         if (StatesManager.gameStates[StatesManager.currentGameState].isLevel && !parentScript.isServed)
         {
             Debug.Log("Leaving dweller is called");
+            FindObjectOfType<AudioManager>().TriggerSound("UnhappyDweller");
             parentScript.LeavingDweller();
         }
 

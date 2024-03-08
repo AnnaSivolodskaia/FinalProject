@@ -23,13 +23,13 @@ public class CutSceneTextCatalog : MonoBehaviour
                 finalText = "Hey, big shoutout to you, my friend! Thanks to your help, our streets are looking squeaky clean now. I can't thank you enough for rolling up your sleeves and diving into the mess with us.\r\n\r\nThe village is already feeling fresher and more inviting, all thanks to your hard work. It's amazing what we can achieve when we team up, isn't it?\r\n";
                 break;
             case "Cut_Scene_3":
-                finalText = "Now, I've got another tiny favor to ask – fresh fish distribution time! \r\nGrab a box (with 'C' key), give it to each citizen (with 'C' key again). Watch out for hungry folks asking for a second box, ask them to leave (hit 'X' key). \r\nAlso, keep an eye on their emotions: hunger can make folks a tad impatient. Let's make sure citizens don’t leave disappointed!\r\nReady to get those fish shared?\r\n";
+                finalText = "Now, I've got another tiny favor to ask – fresh fish distribution time! \r\n\r\nGrab a box (with 'C' key), give it to each citizen (with 'C' key again). Watch out for hungry folks asking for a second box, ask them to leave (hit 'X' key). \r\n\r\nAlso, keep an eye on their emotions: hunger can make folks a tad impatient. Let's make sure citizens don’t leave disappointed!\r\n\r\nReady to get those fish shared?\r\n";
                 break;
             case "2lvl_2":
                 finalText = "Hey again, traveler! Big thanks for your help with the fish distribution – it went well, and citizens are happy. As we gear up for the election, I wanted to express my gratitude. You've been a key player in turning things around. Fingers crossed for the votes, and wish me luck! \r\n\r\nLet’s go and find out the results! \r\n";
                 break;
             case "2lvl_3":
-                finalText = "Hey again, traveler! We hit a snag with the fish distribution – lots left disappointed. Can we try again? \r\nGrab a box (with 'C' key), give it to citizens (with 'C' key again). If someone aims for a second box, ask them to leave (press 'X' key).\r\nWatch emotions: hungry folks need their fair share. \r\n\r\nReady for another round? Your help is crucial!\r\n";
+                finalText = "Hey again, traveler! We hit a snag with the fish distribution – lots left disappointed. Can we try again? \r\n\r\nGrab a box (with 'C' key), give it to citizens (with 'C' key again). If someone aims for a second box, ask them to leave (press 'X' key).\r\nWatch emotions: hungry folks need their fair share. \r\n\r\nReady for another round? Your help is crucial!\r\n";
                 break;
             default:
                 finalText = "Not defined in catalog!";
@@ -53,8 +53,7 @@ public class CutSceneTextCatalog : MonoBehaviour
                 finalText = "Press C: try again";
                 break;
             case "1lvl_2":
-                int currentScore = ScoreSystem.GetScore();
-                finalText = string.Format("Current score is: {0}/300.\r\n Press C: next level", currentScore);
+                finalText = "Press C: \"We got this!\" ";
                 break;
             case "Cut_Scene_3":
                 finalText = "Press C: start the game";
@@ -67,6 +66,39 @@ public class CutSceneTextCatalog : MonoBehaviour
                 break;
             default:
                 finalText = "Not defined in catalog!";
+                break;
+        }
+        return finalText;
+    }
+
+    public static string FindCutSceneVoiceOver(string currentGameState)
+    {
+        string finalText;
+        switch (currentGameState)
+        {
+            case "Cut_Scene_1":
+                finalText = "Intro1";
+                break;
+            case "Cut_Scene_2":
+                finalText = "Intro2";
+                break;
+            case "1lvl_3":
+                finalText = "FirstLevelFailed";
+                break;
+            case "1lvl_2":
+                finalText = "FirstLevelSuccessed";
+                break;
+            case "Cut_Scene_3":
+                finalText = "Intro3";
+                break;
+            case "2lvl_2":
+                finalText = "SecondLevelSuccessed";
+                break;
+            case "2lvl_3":
+                finalText = "SecondLevelFailed";
+                break;
+            default:
+                finalText = "";
                 break;
         }
         return finalText;

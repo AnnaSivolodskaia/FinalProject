@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using static ScoreSystem;
 
 public class StatesManager : MonoBehaviour
 {
@@ -85,8 +86,14 @@ public class StatesManager : MonoBehaviour
         if (gameStates[currentGameState].isCredits)
         {
             LevelManager.UnloadOutro();
-            // add condition to check max score , call normal or secret credits
-            LevelManager.Credits();
+            if(ScoreSystem.GetScore() >= 500)
+            {
+                LevelManager.SecretCredits();
+            }
+            else
+            {
+                LevelManager.Credits();
+            }
         }
     }
 

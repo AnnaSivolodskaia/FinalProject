@@ -27,6 +27,7 @@ public class LitterScript : MonoBehaviour
     private void PinkUpAnimation()
     {
         animator.SetTrigger("PickUp");
+        FindObjectOfType<AudioManager>().TriggerSound("LitterPickUp");
     }
 
     public void Update()

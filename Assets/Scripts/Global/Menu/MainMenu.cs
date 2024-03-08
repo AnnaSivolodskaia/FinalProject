@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour
         menuCanvas.GetComponent<Animator>().SetTrigger("Enable");
         menuCanvas.transform.GetChild(0).gameObject.SetActive(true);
         ScoreSystem.ResetScore();
+
+        FindObjectOfType<AudioManager>().Play("MainTheme", 2f);
     }
 
     public static void UnloadMainMenu()
@@ -24,5 +26,7 @@ public class MainMenu : MonoBehaviour
         // ! Deactivate background environment and animations 
         menuCanvas.GetComponent<Animator>().SetTrigger("Disable");
         menuCanvas.transform.GetChild(0).gameObject.SetActive(false);
+        FindObjectOfType<AudioManager>().StopMusic("MainTheme", 2f);
     }
+
 }

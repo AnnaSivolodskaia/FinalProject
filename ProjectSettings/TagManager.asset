@@ -23,6 +23,7 @@ TagManager:
   - CreditsCanvas
   - MainMenuCanvas
   - OutroScene
+  - SecretCreditsCanvas
   layers:
   - Default
   - TransparentFX

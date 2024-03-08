@@ -113,16 +113,20 @@ public class SecondLevelDwellerScript : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 20f, 0f)), 1f);
         }
 
-        if (IsInRadius() && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1)) )
+        if (IsInRadius() && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox && !isServed && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1)) )
         {
             DwellerQueue.GetComponent<DwellersQueue>().ServeDweller();
             protagonist.GetComponent<ProtagonistMovement>().HandleCrate();
+            FindObjectOfType<AudioManager>().TriggerSound("CrateGive");
+            FindObjectOfType<AudioManager>().TriggerSound("HappyDweller");
+
 
         }
 
-        if( IsInRadius() && isStuck && isServed && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton0)) )
+        if ( IsInRadius() && isStuck && isServed && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton0)) )
         {
             DwellerQueue.GetComponent<DwellersQueue>().AskToLeave();
+            FindObjectOfType<AudioManager>().TriggerSound("OkayDweller");
         }
     }
 

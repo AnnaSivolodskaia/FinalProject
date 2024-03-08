@@ -69,22 +69,25 @@
     <Compile Include="Assets\Scripts\Global\GameManagerScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\DemoFree.cs" />
     <Compile Include="Assets\Scripts\Global\UserInputHandler.cs" />
+    <Compile Include="Assets\Scripts\Global\SettingsScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\SimpleSampleCharacterControl.cs" />
     <Compile Include="Assets\Scripts\Levels\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Levels\First level\DwellerScript.cs" />
     <Compile Include="Assets\Scripts\Cut Scene\CutScene.cs" />
+    <Compile Include="Assets\Scripts\Global\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Levels\First level\LitterScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryLogic.cs" />
     <Compile Include="Assets\Scripts\Levels\First level\Dwellers.cs" />
+    <Compile Include="Assets\Scripts\Global\Sound.cs" />
     <Compile Include="Assets\Scripts\Global\ScoreSystem.cs" />
     <Compile Include="Assets\Scripts\Global\Menu\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Global\State.cs" />
+    <Compile Include="Assets\Scripts\Global\OutroSceneScript.cs" />
     <Compile Include="Assets\Scripts\Levels\First level\Litter.cs" />
     <Compile Include="Assets\Scripts\Levels\Second level\SecondLevelScript.cs" />
     <Compile Include="Assets\Scripts\Global\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Levels\Second level\PatienceMetetScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryWearLogic.cs" />
-    <Compile Include="Assets\Scripts\Global\OutroSceneScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

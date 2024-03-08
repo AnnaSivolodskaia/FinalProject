@@ -198,6 +198,7 @@ public class ProtagonistMovement : MonoBehaviour
 
                 if (closestCrate != null)
                 {
+                    FindObjectOfType<AudioManager>().TriggerSound("CratePickUp");
                     HandleCrate();
                     Destroy(closestCrate);
                 }

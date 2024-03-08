@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public static GameObject mainCamera = Camera.main.gameObject;
+    public static GameObject mainCamera;
 
-    public static Dictionary<string, List<float>> cameraLocations = new Dictionary<string, List<float>>();
+    public static Dictionary<string, List<float>> cameraLocations = new();
 
     private Coroutine cameraTransitionCoroutine;
+
+    private void Awake()
+    {
+        mainCamera = Camera.main.gameObject;
+    }
 
     public static void InitiateDictionary()
     {
