@@ -24,7 +24,7 @@ public class PatienceMetetScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
+/*        if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
         {
             try
             {
@@ -37,9 +37,13 @@ public class PatienceMetetScript : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 200f, 0f)), 1f);
             // coloring the patience meter
             SetSliderValueAndColor(remainingPatienceValue);
-        }
+        }*/
 
-        if(parentScript.isExiting && !deactivationFlag)
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 200f, 0f)), 1f);
+        // coloring the patience meter
+        SetSliderValueAndColor(remainingPatienceValue);
+
+        if (parentScript.isExiting && !deactivationFlag)
         {
             deactivatePatienceMeter();
             deactivationFlag = true;
@@ -49,7 +53,11 @@ public class PatienceMetetScript : MonoBehaviour
     public async void deactivatePatienceMeter()
     {
         await Wait(5f);
-        gameObject.SetActive(false);
+        try
+        {
+            gameObject.SetActive(false);
+        }
+        catch (System.Exception) { }
     }
 
     public void SetSliderValueAndColor(float _remainingPatienceValue)
@@ -112,23 +120,26 @@ public class PatienceMetetScript : MonoBehaviour
     {
         float startTime = Time.time;
         float currentTime = startTime;
-        if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
+        while (currentTime - startTime < time)
         {
-            while (currentTime - startTime < time)
+            if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
             {
                 currentTime += Time.deltaTime;
                 remainingPatienceValue = (time - (currentTime - startTime)) / time;
                 await Task.Yield();
+            }
+            else
+            {
+                break;
             }
         }
     }
 
     public async void PatienceCountDown(float patienceCapacity)
     {
-        parentScript = transform.GetComponentInParent<SecondLevelDwellerScript>();
         await Wait(patienceCapacity);
         Debug.Log("Count Down completed");
-        if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
+        if (StatesManager.gameStates[StatesManager.currentGameState].isLevel && !parentScript.isServed)
         {
             Debug.Log("Leaving dweller is called");
             parentScript.LeavingDweller();

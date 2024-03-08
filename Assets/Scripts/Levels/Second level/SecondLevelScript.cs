@@ -34,6 +34,8 @@ public class SecondLevelScript : MonoBehaviour
     public int score;
     public TextMeshProUGUI lostDwellersText;
     public int lostDwellers;
+    public Animator scoreCanvasAnimator;
+
 
 
 
@@ -45,6 +47,8 @@ public class SecondLevelScript : MonoBehaviour
         allDwellersSpawned = false;
         levelCompleted = false;
         levelIsDisabling = false;
+        scoreCanvasAnimator.SetBool("Disabled", false);
+
 
         // Dwellers spawn points
         possibleSpawnSpots = new List<List<float>> { new List<float> { 176f, 3f }, new List<float> { 147f, -59f }, new List<float> { 103f, -17f }, new List<float> { 103f, -17f } };
@@ -52,20 +56,30 @@ public class SecondLevelScript : MonoBehaviour
         // Dwellers
         dwellerList = new List<SecondLevelDwellers>
         {
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 5, _isServed: false, _isStuck: false),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: frog, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 5, _isServed: false, _isStuck: false),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: frog, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 5, _isServed: false, _isStuck: false),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fox, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 5, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 10, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: racoon, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 6, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: frog, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 8, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fox, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
 
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 5, _isServed: false, _isStuck: true),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: retsuko, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 15, _isServed: false, _isStuck: true),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 15, _isServed: false, _isStuck: true),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 15, _isServed: false, _isStuck: true),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: racoon, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 13, _isServed: false, _isStuck: true),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: tom, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
 
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: retsuko, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 15, _isServed: false, _isStuck: false),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fenneko, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 15, _isServed: false, _isStuck: false),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fox, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 15, _isServed: false, _isStuck: false),
-            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fenneko, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 15, _isServed: false, _isStuck: false)
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: retsuko, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: frog, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 13, _isServed: false, _isStuck: true),
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: fox, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: tom, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 13, _isServed: false, _isStuck: true),
+
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: racoon, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 13, _isServed: false, _isStuck: true),
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: cat, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: tom, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 2, _dwellerModel: frog, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: fox, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 13, _isServed: false, _isStuck: false),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 2, _parentQueue: "third_queue", _patienceCapacity: 13, _isServed: false, _isStuck: true),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: frog, _spawnPoint: 0, _parentQueue: "first_queue", _patienceCapacity: 13, _isServed: false, _isStuck: true),
+            new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: racoon, _spawnPoint: 3, _parentQueue: "fourth_queue", _patienceCapacity: 13, _isServed: false, _isStuck: true)
         };
 
 
@@ -74,9 +88,30 @@ public class SecondLevelScript : MonoBehaviour
         // Crates
         cratesListSpawnSpots = new List<List<float>>
         {
-            new List<float> { 154f, 16f },
-            new List<float> { 150f, 16f },
-            new List<float> { 145f, 20f }
+            new List<float> { 155.58f, 18.22f, 15.47f },
+            new List<float> { 153.52f, 18.22f, 16.26f },
+            new List<float> { 151.48f, 18.22f, 17.05f },
+            new List<float> { 149.43f, 18.22f, 17.86f },
+            new List<float> { 147.37f, 18.22f, 18.68f },
+            new List<float> { 145.22f, 18.22f, 19.55f },
+            new List<float> { 143.05f, 18.22f, 20.38f },
+            new List<float> { 140.85f, 18.22f, 21.25f },
+            new List<float> { 155.58f, 21.22f, 15.47f },
+            new List<float> { 153.52f, 21.22f, 16.26f },
+            new List<float> { 151.48f, 21.22f, 17.05f },
+            new List<float> { 149.43f, 21.22f, 17.86f },
+            new List<float> { 147.37f, 21.22f, 18.68f },
+            new List<float> { 145.22f, 21.22f, 19.55f },
+            new List<float> { 143.05f, 21.22f, 20.38f },
+            new List<float> { 140.85f, 21.22f, 21.25f },
+            new List<float> { 154.87f, 21.22f, 13.74f },
+            new List<float> { 152.81f, 21.22f, 14.53f },
+            new List<float> { 150.77f, 21.22f, 15.32f },
+            new List<float> { 148.72f, 21.22f, 16.13f },
+            new List<float> { 146.66f, 21.22f, 16.95f },
+            new List<float> { 144.51f, 21.22f, 17.82f },
+            new List<float> { 142.34f, 21.22f, 18.65f },
+            new List<float> { 140.14f, 21.22f, 19.52f }
         };
 
         CratesSpawner();
@@ -127,8 +162,8 @@ public class SecondLevelScript : MonoBehaviour
         {
             if (cratesListSpawnSpots != null)
             {
-                Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
-                Vector3 spawnPos = new Vector3(cratesListSpawnSpots[i][0], 25f, cratesListSpawnSpots[i][1]);
+                Quaternion spawnAngle = Quaternion.Euler(0f, -68.756f, 0f);
+                Vector3 spawnPos = new Vector3(cratesListSpawnSpots[i][0], cratesListSpawnSpots[i][1], cratesListSpawnSpots[i][2]);
                 Instantiate(crateModel, spawnPos, spawnAngle);
             }
             else
@@ -187,18 +222,23 @@ public class SecondLevelScript : MonoBehaviour
 
     public void LevelFailed()
     {
+        scoreCanvasAnimator.SetBool("Disabled", true);
         StatesManager.NegativeGameProgression();
     }
 
     public void LevelSuccessed()
     {
         ScoreSystem.UpdateScore(score);
+        scoreCanvasAnimator.SetBool("Disabled", true);
         StatesManager.PositiveGameProgression();
     }
 
     private void OnDisable()
     {
+        scoreCanvasAnimator.SetBool("Disabled", true);
+        Debug.Log("Canvas disabled");
         Terminate();
+
     }
 
     public void Terminate()
@@ -207,6 +247,7 @@ public class SecondLevelScript : MonoBehaviour
         {
             Destroy(crate);
         }
+
         cratesListSpawnSpots = null;
         dwellerList = null;
         scoreText.text = null;

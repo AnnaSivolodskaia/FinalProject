@@ -27,6 +27,8 @@ public class CameraManager : MonoBehaviour
         cameraLocations.Add("1lvl_1", new List<float> { 106.74057f, 30.695137f, 73.5946f, 12.135f, 119.089f, -2.36f });
 
         cameraLocations.Add("2lvl_1", new List<float> { 156.6668f, 47.25932f, 24.92f, 49f, 207f, 6.075f });
+
+        cameraLocations.Add("OutroScene", new List<float> { 101.6833f, 30.28898f, -37.51565f, 11.38f, -3.162f, 0f });
     }
 
     public static void SwitchActiveCamera(string cameraLocation)

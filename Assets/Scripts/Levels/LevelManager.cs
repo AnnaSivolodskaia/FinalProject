@@ -5,9 +5,12 @@ using UnityEngine;
 using System.Threading.Tasks;
 using static CameraManager;
 using Newtonsoft.Json.Utilities;
+using UnityEngine.InputSystem.LowLevel;
 
 public class LevelManager : MonoBehaviour
 {
+    static GameObject outroSceneObject = FindGameObject("OutroScene");
+    static GameObject creditsCanvas;
     public static void LoadCutScene()
     {
         //Switch camera
@@ -39,37 +42,47 @@ public class LevelManager : MonoBehaviour
     public static async void UnloadLevel(string level)
     {
         await StandardWait(1.5f);
+
         FindGameObject(StatesManager.gameStates[level].stateName).SetActive(false);
     }
 
-    public static void LoadOutro()
+    public static async void LoadOutro()
     {
-
+        outroSceneObject.SetActive(true);
+        await StandardWait(1f);
+        CameraManager.SwitchActiveCamera("OutroScene");
+        await StandardWait(3f);
+        outroSceneObject.transform.GetChild(1).gameObject.SetActive(true);
     }
 
-    public static void UnloadOutro()
+    public static async void UnloadOutro()
     {
-
+        outroSceneObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Fading");
+        outroSceneObject.transform.GetChild(1).gameObject.SetActive(false);
+        await StandardWait(4f);
+        outroSceneObject.SetActive(false);
     }
 
-    public static void LoadCredits()
+    public static async void Credits()
     {
-
+        creditsCanvas = FindGameObject("CreditsCanvas"); 
+        await StandardWait(3f);
+        creditsCanvas.SetActive(true);
+        await StandardWait(23f);
+        FindObjectOfType<GameManagerScript>().TerminateCurrentGame();
+        await StandardWait(1f);
+        creditsCanvas.SetActive(false);
     }
 
-    public static void UnloadCredits()
+    public static async void SecretCredits()
     {
-
-    }
-
-    public static void LoadSecretCredits()
-    {
-
-    }
-
-    public static void UnloadSecretCredits()
-    {
-
+        creditsCanvas = FindGameObject("CreditsCanvas");  // Change to secret canvas
+        await StandardWait(3f);
+        creditsCanvas.SetActive(true);
+        await StandardWait(23f);
+        FindObjectOfType<GameManagerScript>().TerminateCurrentGame();
+        await StandardWait(1f);
+        creditsCanvas.SetActive(false);
     }
 
     public static GameObject FindGameObject(string objectTag)

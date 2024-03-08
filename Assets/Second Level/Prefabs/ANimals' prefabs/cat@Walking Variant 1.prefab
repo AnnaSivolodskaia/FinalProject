@@ -513,8 +513,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7839762, y: 4.0599136, z: 1.3711826}
-  m_Center: {x: -0.04904637, y: 1.9423449, z: 0.109978415}
+  m_Size: {x: 1.7839761, y: 4.0599136, z: 1.4394718}
+  m_Center: {x: -0.049046356, y: 1.9423449, z: 0.14412305}
 --- !u!95 &896136077209655463
 Animator:
   serializedVersion: 5
@@ -1113,6 +1113,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3598824199757859434}
     m_Modifications:
+    - target: {fileID: 1645531213388925120, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
+      propertyPath: parentScript
+      value: 
+      objectReference: {fileID: 5082619236259989102}
     - target: {fileID: 7395141092766888964, guid: f3db03f28f53b24489ec02ccf76580e3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1

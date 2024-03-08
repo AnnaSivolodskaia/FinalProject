@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using System;
+using static FirstLevelScript;
 
 public class LitterScript : MonoBehaviour
 {
     public GameObject protagonist;
     public Transform protagonistLoc;
+    public Animator animator;
+
     private float detectionRadius = 2f;
     public GameObject plasticBin;
     public GameObject metalBin;
@@ -18,14 +21,22 @@ public class LitterScript : MonoBehaviour
     public void Awake()
     {
         CountDown();
+
+    }
+
+    private void PinkUpAnimation()
+    {
+        animator.SetTrigger("PickUp");
     }
 
     public void Update()
     {
-        GameObject protagonist = GameObject.Find("Protagonist");
         GameObject plasticBin = GameObject.Find("PlasticTrashBin");
         GameObject metalBin = GameObject.Find("MetalTrashBin");
-        GameObject bioBin = GameObject.Find("BioTrashBin");
+        GameObject bioBin = GameObject.Find("BioTrashBin"); 
+        
+        GameObject protagonist = GameObject.Find("Protagonist");
+        animator = protagonist.GetComponent<Animator>();
 
         if (protagonist != null)
         {
@@ -34,14 +45,17 @@ public class LitterScript : MonoBehaviour
             {
                 if(gameObject.tag == "BananaLitter")
                 {
-                    if (Input.GetKeyDown(KeyCode.Z))
+                    if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.JoystickButton2))
                     {
+                        PinkUpAnimation();
                         FirstLevelScript.score += 10;
                         FirstLevelScript.bananasCollected += 1;
                         Shake(bioBin);
-                        Destroy(gameObject);    
-                    } else if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.C))
+                        Destroy(gameObject);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1))
                     {
+                        PinkUpAnimation();
                         FirstLevelScript.score += 5;
                         FirstLevelScript.mistakesMade += 1;
                         Shake(bioBin);
@@ -50,16 +64,18 @@ public class LitterScript : MonoBehaviour
                 }
                 if (gameObject.tag == "BottleLitter")
                 {
-                    if (Input.GetKeyDown(KeyCode.X))
+                    if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton0))
                     {
+                        PinkUpAnimation();
                         FirstLevelScript.score += 10;
                         FirstLevelScript.bottlesCollected += 1;
                         //shakes blue bin correctly
                         Shake(plasticBin);
                         Destroy(gameObject);
                     }
-                    else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.C))
+                    else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1))
                     {
+                        PinkUpAnimation();
                         FirstLevelScript.score += 5;
                         FirstLevelScript.mistakesMade += 1;
                         Shake(plasticBin);
@@ -68,17 +84,19 @@ public class LitterScript : MonoBehaviour
                 }
                 if (gameObject.tag == "CanLitter")
                 {
-                    if (Input.GetKeyDown(KeyCode.C))
+                    if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1))
                     {
+                        PinkUpAnimation();
                         FirstLevelScript.score += 10;
                         FirstLevelScript.cansCollected += 1;
                         Shake(metalBin);
                         Destroy(gameObject);
                     }
-                    else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X))
+                    else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton0))
                     {
+                        PinkUpAnimation();
                         FirstLevelScript.score += 5;
-                        FirstLevelScript.mistakesMade += 1;
+                        FirstLevelScript.mistakesMade = Math.Min(3, FirstLevelScript.mistakesMade + 1);
                         Shake(metalBin);
                         Destroy(gameObject);
                     }

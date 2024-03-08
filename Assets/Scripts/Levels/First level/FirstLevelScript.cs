@@ -39,8 +39,13 @@ public class FirstLevelScript : MonoBehaviour
     public static int cansCollected;
     public static int bottlesCollected;
     public static int bananasCollected;
-
-
+    public Animator scoreCanvasAnimator;
+/*
+    private void Start()
+    {
+        scoreCanvasAnimator.SetBool("Disabled", false);
+    }
+*/
     public void OnEnable()
     {
         // Starting the level
@@ -53,18 +58,19 @@ public class FirstLevelScript : MonoBehaviour
         bottlesCollected = 0;
         bananasCollected = 0;
 
-    // 113 53
-    // 115 56
-    // 117 59
-    // 118 61
-    // 120 64
-    // 122.43 66.71
-    // 124.67 69.49
-    // 127.37 72.86
-    // 129.5 76
 
-    // Defining litter to be spawned on the level
-    litterlist = new List<Litter>()
+        // 113 53
+        // 115 56
+        // 117 59
+        // 118 61
+        // 120 64
+        // 122.43 66.71
+        // 124.67 69.49
+        // 127.37 72.86
+        // 129.5 76
+
+        // Defining litter to be spawned on the level
+        litterlist = new List<Litter>()
         {
             new Litter(_time: 3f, _locX: 120f, _locY: 24f, _locZ: 64f, _litterName: banana),
             new Litter(_time: 2.5f, _locX: 129.5f, _locY: 24f, _locZ: 76f, _litterName: can),
@@ -220,12 +226,14 @@ public class FirstLevelScript : MonoBehaviour
 
     public void LevelFailed()
     {
+        scoreCanvasAnimator.SetBool("Disabled", true);
         StatesManager.NegativeGameProgression();
     }
 
     public void LevelSuccessed()
     {
         ScoreSystem.UpdateScore(score);
+        scoreCanvasAnimator.SetBool("Disabled", true);
         StatesManager.PositiveGameProgression();
     }
     public void Terminate()

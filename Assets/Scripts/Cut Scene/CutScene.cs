@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 using static CutSceneTextCatalog;
 using static LevelManager;
 
@@ -15,9 +16,9 @@ public class CutScene : MonoBehaviour
 
     public void EnableDialogWindow()
     {
-        GetComponent<Animator>().SetTrigger("Enable");
         DefineDialogText(StatesManager.currentGameState);
-        UserInputHandler.Input_C += CheckUserAction;
+        GetComponent<Animator>().SetTrigger("Enable");
+        EnableUserInput();
     }
 
     public void DisableDialogWindow()
@@ -44,6 +45,22 @@ public class CutScene : MonoBehaviour
         if (StatesManager.gameStates[StatesManager.currentGameState].isCutScene)
         {
             SwitchDialogContent();
+        }
+    }
+
+    private async void EnableUserInput()
+    {
+        await Wait(2f);
+        UserInputHandler.Input_C += CheckUserAction;
+    }
+    private async Task Wait(float time)
+    {
+        float startTime = Time.time;
+        float currentTime = startTime;
+        while (currentTime - startTime < time)
+        {
+            currentTime += Time.deltaTime;
+            await Task.Yield();
         }
     }
 }

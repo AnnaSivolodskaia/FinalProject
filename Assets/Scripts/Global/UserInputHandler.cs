@@ -9,7 +9,7 @@ public class UserInputHandler : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             Input_C?.Invoke();
         }
