@@ -17,6 +17,8 @@ public class DwellersQueue : MonoBehaviour
 
     private void OnEnable()
     {
+        dwellersInQueue = new List<GameObject>();
+
         possibleIncomingRoutes = new Dictionary<string, List<List<float>>>
         {
             { "first_queue", new List<List<float>> { new List<float> { 167f, 1f }, new List<float> { 162f, -12f }, new List<float> { 149f, -9f } } },
@@ -67,6 +69,7 @@ public class DwellersQueue : MonoBehaviour
 
     public void RemoveDweller()
     {
+        Debug.Log("Remove Dweller is called.");
         dwellersInQueue.RemoveAt(0);
         for (var i = 0; i < dwellersInQueue.Count; i++)
         {

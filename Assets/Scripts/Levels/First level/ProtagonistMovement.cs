@@ -168,12 +168,12 @@ public class ProtagonistMovement : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
-        if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
+        if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel && isCarryingBox)
         {
             HandleCrate();
         }
 
-        if (Input.GetKeyDown(KeyCode.C) && !isCarryingBox)
+        if ( (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1)) && !isCarryingBox)
         {
             cratesOnLevel = GameObject.FindGameObjectsWithTag("secondLevelCrate");
 

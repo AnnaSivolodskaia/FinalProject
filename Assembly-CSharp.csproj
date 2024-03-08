@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Global\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Levels\Second level\PatienceMetetScript.cs" />
     <Compile Include="Assets\Supercyan Character Pack Animal People Sample\Scripts\AccessoryWearLogic.cs" />
+    <Compile Include="Assets\Scripts\Global\OutroSceneScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

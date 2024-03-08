@@ -22,6 +22,7 @@ TagManager:
   - secondLevelCrate
   - CreditsCanvas
   - MainMenuCanvas
+  - OutroScene
   layers:
   - Default
   - TransparentFX

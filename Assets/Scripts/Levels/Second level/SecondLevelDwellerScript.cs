@@ -113,13 +113,14 @@ public class SecondLevelDwellerScript : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 20f, 0f)), 1f);
         }
 
-        if (IsInRadius() && Input.GetKeyDown(KeyCode.C) && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox)
+        if (IsInRadius() && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1)) )
         {
             DwellerQueue.GetComponent<DwellersQueue>().ServeDweller();
             protagonist.GetComponent<ProtagonistMovement>().HandleCrate();
+
         }
 
-        if( IsInRadius() && Input.GetKeyDown(KeyCode.X) && isStuck)
+        if( IsInRadius() && isStuck && isServed && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton0)) )
         {
             DwellerQueue.GetComponent<DwellersQueue>().AskToLeave();
         }
@@ -129,7 +130,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
     {
         Transform protagonistLoc = protagonist.transform;
         float distance = Vector3.Distance(transform.position, protagonistLoc.position);
-        return distance <= 5f;
+        return distance <= 4.8f;
     }
 
     public void defineNextAction()

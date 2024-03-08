@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && StatesManager.currentGameState != "MainMenu")  // invoke userInputHandler
+        if( (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)) && StatesManager.currentGameState != "MainMenu")  // invoke userInputHandler
         {
             if(gameIsPaused)
             {

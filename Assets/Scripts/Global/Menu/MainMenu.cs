@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
 
         CameraManager.SwitchActiveCamera("MainMenuLocation");
         menuCanvas.GetComponent<Animator>().SetTrigger("Enable");
+        menuCanvas.transform.GetChild(0).gameObject.SetActive(true);
         ScoreSystem.ResetScore();
     }
 
@@ -22,5 +23,6 @@ public class MainMenu : MonoBehaviour
     {
         // ! Deactivate background environment and animations 
         menuCanvas.GetComponent<Animator>().SetTrigger("Disable");
+        menuCanvas.transform.GetChild(0).gameObject.SetActive(false);
     }
 }
