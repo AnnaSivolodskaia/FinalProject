@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if( (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)) && StatesManager.currentGameState != "MainMenu")  // invoke userInputHandler
+        if( (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)) && StatesManager.currentGameState != "MainMenu")
         {
             if(gameIsPaused)
             {
@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        _GameManagerScript = FindObjectOfType<GameManagerScript>(); // !!! Change to FindByTag()
+        _GameManagerScript = FindObjectOfType<GameManagerScript>();
         _GameManagerScript.TerminateCurrentGame();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -76,7 +76,5 @@ public class PauseMenu : MonoBehaviour
 
             Resume();
         }
-
-
     }
  }

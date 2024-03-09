@@ -10,36 +10,21 @@ public class PatienceMetetScript : MonoBehaviour
     public Slider slider;
     public GameObject sliderFill;
     public SecondLevelDwellerScript parentScript;
-
+    
+    // emojis
     public GameObject happy;
     public GameObject sad;
     public GameObject neutral;
     public GameObject satisfied;
     public GameObject angry;
 
-
-
     public bool deactivationFlag = false;
 
-    // Update is called once per frame
     void Update()
     {
-/*        if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
-        {
-            try
-            {
-                gameObject.SetActive(false);
-            }
-            catch (System.Exception){}
-        }
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 200f, 0f)), 1f);
-            // coloring the patience meter
-            SetSliderValueAndColor(remainingPatienceValue);
-        }*/
-
+        //slightly rotate patience meter upwards to face camera angle
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 200f, 0f)), 1f);
+        
         // coloring the patience meter
         SetSliderValueAndColor(remainingPatienceValue);
 
@@ -50,6 +35,7 @@ public class PatienceMetetScript : MonoBehaviour
         }
     }
 
+    // patience meter should be visible for 5 seconds after success/fail
     public async void deactivatePatienceMeter()
     {
         await Wait(5f);
@@ -134,14 +120,12 @@ public class PatienceMetetScript : MonoBehaviour
             }
         }
     }
-
+    // Countdown checks whether dweller wasn't served in time and registers mistake
     public async void PatienceCountDown(float patienceCapacity)
     {
         await Wait(patienceCapacity);
-        Debug.Log("Count Down completed");
         if (StatesManager.gameStates[StatesManager.currentGameState].isLevel && !parentScript.isServed)
         {
-            Debug.Log("Leaving dweller is called");
             FindObjectOfType<AudioManager>().TriggerSound("UnhappyDweller");
             parentScript.LeavingDweller();
         }

@@ -8,12 +8,6 @@ using System.Threading.Tasks;
 
 public class SecondLevelDwellerScript : MonoBehaviour
 {
-
-    // request for routes and places coordinates
-    // Dweller movement
-    // call-backs to queue script to initiate events (add/remove dweller)
-    // Patience count-down
-
     public GameObject patienceMeter;
 
     public float movementSpeed = 1f;
@@ -97,6 +91,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
 
     private void Update()
     {
+        // if level is already failed, destroying this instance
         if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
         {
             DestroyDweller();
@@ -104,15 +99,17 @@ public class SecondLevelDwellerScript : MonoBehaviour
 
         if (isMoving)
         {
+            // trigger movement towards current spot
             DwellerMovement(currentTravelSpotCoordinates);
             GetComponent<Animator>().SetBool("IsMoving", true);
         } else
         {
-            // trigger "idle" animation 
+            // trigger "idle" animation and rotate towards table
             GetComponent<Animator>().SetBool("IsMoving", false);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 20f, 0f)), 1f);
         }
 
+        // mechanism for serving dweller
         if (IsInRadius() && protagonist.GetComponent<ProtagonistMovement>().isCarryingBox && !isServed && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1)) )
         {
             DwellerQueue.GetComponent<DwellersQueue>().ServeDweller();
@@ -123,6 +120,7 @@ public class SecondLevelDwellerScript : MonoBehaviour
 
         }
 
+        // mechanism for unstucking dweller
         if ( IsInRadius() && isStuck && isServed && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton0)) )
         {
             DwellerQueue.GetComponent<DwellersQueue>().AskToLeave();
@@ -199,21 +197,17 @@ public class SecondLevelDwellerScript : MonoBehaviour
         float locX = travelSpot[0];
         float locZ = travelSpot[1];
 
-        // Calculate the direction vector from current position to target position
+        // Calculate direction and rotation angle vectors
         Vector3 direction = new Vector3(locX - transform.position.x, 0f, locZ - transform.position.z).normalized;
 
-        // Calculate the rotation angle based on the direction vector
         float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-
-        // Set the target rotation
         Quaternion targetAngles = Quaternion.Euler(new Vector3(0f, angleY, 0f));
 
-        // Smoothly rotate towards the target rotation
+        // Move to the target pos
         transform.rotation = Quaternion.Slerp(transform.rotation, targetAngles, 1f);
-
-        // Move towards the target position
         transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
 
+        // Switch to the next destinatioon spot
         if (Math.Round(gameObject.transform.position.x, 1) == Math.Round(locX, 1) && Math.Round(gameObject.transform.position.z, 1) == Math.Round(locZ, 1))
         {
             defineNextAction();

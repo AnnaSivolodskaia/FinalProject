@@ -17,6 +17,7 @@ public class ProtagonistMovement : MonoBehaviour
 
     public GameObject[] cratesOnLevel;
 
+    //defining spots for protagonist traveling route to move in one dimension only
     public List<List<float>> firstLevelProtagonistRoute = new List<List<float>> { new List<float> { 131.41f, 80f }, new List<float> { 129.73f, 77.18f }, new List<float> { 127.56f, 74f }, new List<float> { 124f, 69.56f }, new List<float> { 119.47f, 64.54f }, new List<float> { 117.62f, 61.27f }, new List<float> { 114.63f, 57.36f }, new List<float> { 111f, 53f }, new List<float> { 108.73f, 50.42f } };
     public int firstLevelProtagonistCurrentRoutePoint;
     public int travelPoint;
@@ -48,7 +49,7 @@ public class ProtagonistMovement : MonoBehaviour
     {
         if (currentLevel == "1lvl_1")
         {
-            NewFirstLevelMovement();
+            FirstLevelMovement();
         }
         else if (currentLevel == "2lvl_1")
         {
@@ -56,42 +57,7 @@ public class ProtagonistMovement : MonoBehaviour
         }
     }
 
-/*    private void FirstLevelMovement()
-    {
-        float turn = Input.GetAxis("Horizontal");
-
-        if (turn < 0)
-        {
-            //turn left
-            transform.rotation = Quaternion.Euler(0, 35, 0);
-        }
-        else if (turn > 0)
-        {
-            //turn right
-            transform.rotation = Quaternion.Euler(0, 215, 0);
-        }
-
-        if (Mathf.Abs(turn) > 0)
-        {
-            //trigger walking animation
-            animator.SetBool("Moving", true);
-            Vector3 newPosition = transform.position + transform.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime;
-            if (IsPositionWithinBounds(newPosition))
-                //{
-                // Move within bounds
-                transform.Translate(Vector3.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime);
-            //}
-            //movement
-            //transform.Translate(Vector3.forward * Mathf.Abs(turn) * movementSpeed * Time.deltaTime);
-        }
-        else
-        {
-            //stop walking
-            animator.SetBool("Moving", false);
-        }
-    }*/
-
-    private void NewFirstLevelMovement()
+    private void FirstLevelMovement()
     {
         float turn = Input.GetAxis("Horizontal");
         float protagonistMovementSpeed;
@@ -110,18 +76,14 @@ public class ProtagonistMovement : MonoBehaviour
             locX = firstLevelProtagonistRoute[travelPoint][0];
             locZ = firstLevelProtagonistRoute[travelPoint][1];
         }
-        
 
-        // Calculate the direction vector from current position to target position
+        // Calculate direction and rotation angle vectors
         Vector3 direction = new Vector3(locX - transform.position.x, 0f, locZ - transform.position.z).normalized;
 
-        // Calculate the rotation angle based on the direction vector
         float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-
-        // Set the target rotation
         Quaternion targetAngles = Quaternion.Euler(new Vector3(0f, angleY, 0f));
-
-        // Smoothly rotate towards the target rotation
+        
+        // Rotate to the target pos
         transform.rotation = Quaternion.Slerp(transform.rotation, targetAngles, 1f);
 
         if (Mathf.Abs(turn) > 0)
@@ -135,7 +97,7 @@ public class ProtagonistMovement : MonoBehaviour
             animator.SetBool("Moving", false);
         }
 
-        // Define movement speed (invisible wall mechanism)
+        // Define movement speed (speed zero to implement "invisible wall" mechanism)
         if ( travelPoint == 0 || travelPoint == (firstLevelProtagonistRoute.Count - 1))
         {
             protagonistMovementSpeed = 0f;
@@ -145,9 +107,9 @@ public class ProtagonistMovement : MonoBehaviour
             protagonistMovementSpeed = Mathf.Abs(turn);
         }
 
-        // Move towards the target position
+        // Move to the target pos
         transform.Translate(direction * protagonistMovementSpeed * movementSpeed * Time.deltaTime, Space.World);
-
+        // Defining next travel spot
         if (Math.Round(gameObject.transform.position.x, 1) == Math.Round(locX, 1) && Math.Round(gameObject.transform.position.z, 1) == Math.Round(locZ, 1))
         {
             if (turn < 0)
@@ -167,12 +129,14 @@ public class ProtagonistMovement : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput).normalized;
-
+        
+        // if level failed when protagonist carried box, next try should have reset state 
         if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel && isCarryingBox)
         {
             HandleCrate();
         }
 
+        // picking up crate and destroying nearest crate game object
         if ( (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1)) && !isCarryingBox)
         {
             cratesOnLevel = GameObject.FindGameObjectsWithTag("secondLevelCrate");
@@ -207,40 +171,20 @@ public class ProtagonistMovement : MonoBehaviour
 
         if (movement != Vector3.zero)
         {
-            // Custom rotation factor (scene is not aligned with x/z coordintaes 
+            // Custom angle, since scene is not aligned with x/z coordintaes 
             float rotationFactor = 200f;
 
-            // Rotate towards the input direction with the custom factor
+            // Rotate to the input direction with the custom angle
             Quaternion rotation = Quaternion.LookRotation(movement) * Quaternion.Euler(0, rotationFactor, 0);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10);
 
-
-
-
-            // Trigger walking animation
             animator.SetBool("Moving", true);
             transform.Translate(Vector3.forward * movement.magnitude * movementSpeed * Time.deltaTime);
-
-            
-            //animator.SetBool("IsCarryingBox", true);
-            //animator.SetBool("isMovingCarrying", true);
-
-            // Move in the specified direction
         }
         else
         {
             // Stop walking
             animator.SetBool("Moving", false);
-
-
-            //animator.SetBool("IsCarryingBox", false);
-            //animator.SetBool("isMovingCarrying", false);
-
-
-            //if(is carying box)
-            //{one animation} else {
-            //another animation}
-            //same for idle pose 
         }
 
     }

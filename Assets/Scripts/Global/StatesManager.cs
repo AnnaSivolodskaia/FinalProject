@@ -19,10 +19,11 @@ public class StatesManager : MonoBehaviour
     public static void Initiate()
     {
         //Defining all possible states
+        //In case new level is addded, it should go before outro scene
         gameStates.Add("MainMenu", new State(name: "Main Menu", isLvl: false, isCutScn: false, positiveState: "Cut_Scene_1", negativeState: null, isOutroScn: false, isCreditsScn: false));
 
         gameStates.Add("Cut_Scene_1", new State(name: "Introduction First Screen", isLvl: false, isCutScn: true, positiveState: "Cut_Scene_2", negativeState: null, isOutroScn: false, isCreditsScn: false));
-        gameStates.Add("Cut_Scene_2", new State(name: "Introduction Second Screen", isLvl: false, isCutScn: true, positiveState: "1lvl_1", negativeState: null, isOutroScn: false, isCreditsScn: false)); // revert to 1lvl_1   OR 2lvl_1
+        gameStates.Add("Cut_Scene_2", new State(name: "Introduction Second Screen", isLvl: false, isCutScn: true, positiveState: "1lvl_1", negativeState: null, isOutroScn: false, isCreditsScn: false));
 
         gameStates.Add("1lvl_1", new State(name: "First Level Gameplay", isLvl: true, isCutScn: false, positiveState: "1lvl_2", negativeState: "1lvl_3", isOutroScn: false, isCreditsScn: false));
         gameStates.Add("1lvl_2", new State(name: "First Level Successed", isLvl: false, isCutScn: true, positiveState: "Cut_Scene_3", negativeState: null, isOutroScn: false, isCreditsScn: false));
@@ -47,7 +48,7 @@ public class StatesManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("UNDEFINED STATE " + newState);
+            Debug.LogWarning("UNDEFINED STATE: " + newState);
         }
     }
 

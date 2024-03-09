@@ -11,8 +11,6 @@ public class MainMenu : MonoBehaviour
     
     public static void LoadMainMenu()
     {
-        //Activate background environment and animations 
-
         CameraManager.SwitchActiveCamera("MainMenuLocation");
         menuCanvas.GetComponent<Animator>().SetTrigger("Enable");
         menuCanvas.transform.GetChild(0).gameObject.SetActive(true);
@@ -23,7 +21,6 @@ public class MainMenu : MonoBehaviour
 
     public static void UnloadMainMenu()
     {
-        // ! Deactivate background environment and animations 
         menuCanvas.GetComponent<Animator>().SetTrigger("Disable");
         menuCanvas.transform.GetChild(0).gameObject.SetActive(false);
         FindObjectOfType<AudioManager>().StopMusic("MainTheme", 2f);

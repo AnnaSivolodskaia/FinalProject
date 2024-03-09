@@ -83,7 +83,7 @@ public class AudioManager : MonoBehaviour
         }
 
         sound.source.Stop();
-        sound.source.volume = startVolume; // Reset volume to the original value
+        sound.source.volume = startVolume;
     }
 
 }

@@ -14,10 +14,8 @@ public class LevelManager : MonoBehaviour
     public static void LoadCutScene()
     {
         FindObjectOfType<AudioManager>().Play("CutScene", 2f);
-        //Switch camera
         CameraManager.SwitchActiveCamera("CutSceneLocation");
-        //Activate dialog window
-        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
+        CutScene dialogWindow = FindObjectOfType<CutScene>();
         if (dialogWindow != null)
         {
             dialogWindow.EnableDialogWindow();
@@ -27,8 +25,7 @@ public class LevelManager : MonoBehaviour
     public static void UnloadCutScene()
     {
         FindObjectOfType<AudioManager>().StopMusic("CutScene", 2f);
-        //Deactivate dialog window
-        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
+        CutScene dialogWindow = FindObjectOfType<CutScene>();
         if (dialogWindow != null)
         {
             dialogWindow.DisableDialogWindow();
@@ -44,6 +41,10 @@ public class LevelManager : MonoBehaviour
     }
     public static async void UnloadLevel(string level)
     {
+        if( FindGameObject(StatesManager.gameStates[level].stateName).TryGetComponent<SecondLevelScript>(out SecondLevelScript script) )
+        {
+            script.levelIsDisabling = true;
+        }
         FindObjectOfType<AudioManager>().StopMusic("LevelPlaying", 2f);
         await StandardWait(1.5f);
 
@@ -85,6 +86,7 @@ public class LevelManager : MonoBehaviour
 
     public static async void SecretCredits()
     {
+        //Modified function to be triggered once max score is achieved, plays a SeCrEt ViDeO ;)
         creditsCanvas = FindGameObject("SecretCreditsCanvas");
         await StandardWait(3f);
         creditsCanvas.SetActive(true);

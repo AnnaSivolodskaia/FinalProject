@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 public class DwellerScript : MonoBehaviour
 {
     public float movementSpeed = 1f;
-    // List of routes, containing list of travel spots, containing spot's coordinates
+    //List of routes, containing list of travel spots, containing spot's coordinates
     public List<List<List<float>>> travelRoutes;
-    // Selected travel route for this Dweller
+    //Selected travel route for instantiated Dweller
     public List<List<float>> travelRoute;
-    
+    //Current destination spot for instantiated dweller
     private int currentTravelSpot;
     private float currentPosX;
     private float currentPosZ;
@@ -84,7 +84,6 @@ public class DwellerScript : MonoBehaviour
         movementSpeed = _dwellerSpeed;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!StatesManager.gameStates[StatesManager.currentGameState].isLevel)
@@ -106,21 +105,18 @@ public class DwellerScript : MonoBehaviour
         float locX = travelSpot[0];
         float locZ = travelSpot[1];
 
-        // Calculate the direction vector from current position to target position
+        // Calculate direction and rotation angle vectors
         Vector3 direction = new Vector3(locX - transform.position.x, 0f, locZ - transform.position.z).normalized;
 
-        // Calculate the rotation angle based on the direction vector
         float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-
-        // Set the target rotation
         Quaternion targetAngles = Quaternion.Euler(new Vector3(0f, angleY, 0f));
 
-        // Smoothly rotate towards the target rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetAngles, 1f);
 
-        // Move towards the target position
+        // Move to the target pos
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetAngles, 1f);
         transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
 
+        // Switch to the next destinatioon spot
         if(Mathf.Round(gameObject.transform.position.x) == locX && Mathf.Round(gameObject.transform.position.z) == locZ)
         {
            currentTravelSpot += 1;
