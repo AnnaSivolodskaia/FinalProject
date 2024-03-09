@@ -14,9 +14,6 @@ public class GameManagerScript : MonoBehaviour
 
     void Start()
     {
-        //This function loads the game on start up
-
-        //Initiating game states
         StatesManager.Initiate();
         StatesManager.SetState("MainMenu");
 
@@ -27,15 +24,14 @@ public class GameManagerScript : MonoBehaviour
 
     public void StartNewGame()
     {
-        // This function initiates new game from the main menu
-
+        //Initiating new game from the main menu
         StatesManager.PositiveGameProgression();
         MainMenu.UnloadMainMenu();
     }
 
-    public void TerminateCurrentGame()  // Refactor!
+    public void TerminateCurrentGame()
     {
-        // This function reset the game progress and cleans up memory
+        //Reseting the game progress and clean up memory
         MainMenu.LoadMainMenu();
         
         if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)

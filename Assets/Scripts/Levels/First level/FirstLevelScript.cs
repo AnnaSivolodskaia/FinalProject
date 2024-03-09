@@ -40,12 +40,7 @@ public class FirstLevelScript : MonoBehaviour
     public static int bottlesCollected;
     public static int bananasCollected;
     public Animator scoreCanvasAnimator;
-/*
-    private void Start()
-    {
-        scoreCanvasAnimator.SetBool("Disabled", false);
-    }
-*/
+
     public void OnEnable()
     {
         // Starting the level
@@ -57,17 +52,6 @@ public class FirstLevelScript : MonoBehaviour
         cansCollected = 0;
         bottlesCollected = 0;
         bananasCollected = 0;
-
-
-        // 113 53
-        // 115 56
-        // 117 59
-        // 118 61
-        // 120 64
-        // 122.43 66.71
-        // 124.67 69.49
-        // 127.37 72.86
-        // 129.5 76
 
         // Defining litter to be spawned on the level
         litterlist = new List<Litter>()
@@ -192,6 +176,7 @@ public class FirstLevelScript : MonoBehaviour
             {
                 Quaternion spawnAngle = Quaternion.Euler(0f, 0f, 0f);
                 Vector3 spawnPos = new Vector3(dwellerList[i].locX, dwellerList[i].locY, dwellerList[i].locZ);
+                // Instantiating dweller and passing relevant atributes to it
                 Instantiate(dwellerList[i].dwellerModel, spawnPos, spawnAngle).GetComponent<DwellerScript>().setParameters(dwellerList[i].travelRoute, dwellerList[i].currentTravelSpot, dwellerList[i].dwellerSpeed);
             }
             else

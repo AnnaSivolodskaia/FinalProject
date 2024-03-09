@@ -31,7 +31,8 @@ public class CutScene : MonoBehaviour
     {
         mainText.text = CutSceneTextCatalog.FindDialogMainText(currentState);
         bottomText.text = CutSceneTextCatalog.FindDialogBottomText(currentState);
-    }
+        FindObjectOfType<AudioManager>().TriggerSound(CutSceneTextCatalog.FindCutSceneVoiceOver(currentState));
+    }   
 
     public void SwitchDialogContent()
     {
@@ -40,6 +41,7 @@ public class CutScene : MonoBehaviour
 
     public void CheckUserAction()
     {
+        FindObjectOfType<AudioManager>().StopSound(CutSceneTextCatalog.FindCutSceneVoiceOver(StatesManager.currentGameState));
         StatesManager.PositiveGameProgression();
 
         if (StatesManager.gameStates[StatesManager.currentGameState].isCutScene)

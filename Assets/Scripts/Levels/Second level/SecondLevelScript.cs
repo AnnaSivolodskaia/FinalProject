@@ -22,8 +22,8 @@ public class SecondLevelScript : MonoBehaviour
 
     // Lists and flags for spawners
     public List<List<float>> possibleSpawnSpots;
-    public bool? allDwellersSpawned;
     public List<List<float>> cratesListSpawnSpots;
+    public bool? allDwellersSpawned;
 
     // Winning condition helping flag
     public bool levelCompleted;
@@ -41,6 +41,7 @@ public class SecondLevelScript : MonoBehaviour
 
     private void OnEnable()
     {
+        // Starting the level
         score = 0;
         lostDwellers = 0;
         scoreText.text = "";
@@ -53,7 +54,7 @@ public class SecondLevelScript : MonoBehaviour
         // Dwellers spawn points
         possibleSpawnSpots = new List<List<float>> { new List<float> { 176f, 3f }, new List<float> { 147f, -59f }, new List<float> { 103f, -17f }, new List<float> { 103f, -17f } };
 
-        // Dwellers
+        // Defining dwellers to be spawned on the level
         dwellerList = new List<SecondLevelDwellers>
         {
             new SecondLevelDwellers(_spawnAwait: 1, _dwellerModel: cat, _spawnPoint: 1, _parentQueue: "second_queue", _patienceCapacity: 10, _isServed: false, _isStuck: false),
@@ -85,7 +86,7 @@ public class SecondLevelScript : MonoBehaviour
 
         DwellerSpawner();
 
-        // Crates
+        // Defining crates to be spawned on the level
         cratesListSpawnSpots = new List<List<float>>
         {
             new List<float> { 155.58f, 18.22f, 15.47f },
@@ -122,12 +123,16 @@ public class SecondLevelScript : MonoBehaviour
     {
         float startTime = Time.time;
         float currentTime = startTime;
-        if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
+        while (currentTime - startTime < time)
         {
-            while (currentTime - startTime < time)
+            if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
             {
                 currentTime += Time.deltaTime;
                 await Task.Yield();
+            }
+            else
+            {
+                break;
             }
         }
     }
@@ -175,15 +180,9 @@ public class SecondLevelScript : MonoBehaviour
 
     }
 
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        // Updating score
         if (scoreText.text != null)
         {
             scoreText.text = String.Format("Score:  {0}", score);
@@ -236,7 +235,6 @@ public class SecondLevelScript : MonoBehaviour
     private void OnDisable()
     {
         scoreCanvasAnimator.SetBool("Disabled", true);
-        Debug.Log("Canvas disabled");
         Terminate();
 
     }

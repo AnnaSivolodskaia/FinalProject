@@ -13,7 +13,7 @@ public class LitterScript : MonoBehaviour
     public Transform protagonistLoc;
     public Animator animator;
 
-    private float detectionRadius = 2f;
+    private float detectionRadius = 2f; //detection between litter and protagonist
     public GameObject plasticBin;
     public GameObject metalBin;
     public GameObject bioBin;
@@ -21,12 +21,12 @@ public class LitterScript : MonoBehaviour
     public void Awake()
     {
         CountDown();
-
     }
 
     private void PinkUpAnimation()
     {
         animator.SetTrigger("PickUp");
+        FindObjectOfType<AudioManager>().TriggerSound("LitterPickUp");
     }
 
     public void Update()
@@ -69,7 +69,6 @@ public class LitterScript : MonoBehaviour
                         PinkUpAnimation();
                         FirstLevelScript.score += 10;
                         FirstLevelScript.bottlesCollected += 1;
-                        //shakes blue bin correctly
                         Shake(plasticBin);
                         Destroy(gameObject);
                     }
@@ -130,6 +129,7 @@ public class LitterScript : MonoBehaviour
        bin.GetComponent<Animator>().SetTrigger("enabled");
     }
 
+    // Countdown checks whether litter wasn't picked up at 5 seconds and registers mistake
     public async void CountDown()
     {
         try
@@ -153,12 +153,16 @@ public class LitterScript : MonoBehaviour
         float startTime = Time.time;
         float currentTime = startTime;
 
-        if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
+        while (currentTime - startTime < time)
         {
-            while (currentTime - startTime < time)
+            if (StatesManager.gameStates[StatesManager.currentGameState].isLevel)
             {
                 currentTime += Time.deltaTime;
                 await Task.Yield();
+            }
+            else
+            {
+                break;
             }
         }
     }

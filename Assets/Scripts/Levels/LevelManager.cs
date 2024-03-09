@@ -13,10 +13,9 @@ public class LevelManager : MonoBehaviour
     static GameObject creditsCanvas;
     public static void LoadCutScene()
     {
-        //Switch camera
+        FindObjectOfType<AudioManager>().Play("CutScene", 2f);
         CameraManager.SwitchActiveCamera("CutSceneLocation");
-        //Activate dialog window
-        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
+        CutScene dialogWindow = FindObjectOfType<CutScene>();
         if (dialogWindow != null)
         {
             dialogWindow.EnableDialogWindow();
@@ -25,8 +24,8 @@ public class LevelManager : MonoBehaviour
 
     public static void UnloadCutScene()
     {
-        //Deactivate dialog window
-        CutScene dialogWindow = FindObjectOfType<CutScene>(); // !!! Change to FindByTag()
+        FindObjectOfType<AudioManager>().StopMusic("CutScene", 2f);
+        CutScene dialogWindow = FindObjectOfType<CutScene>();
         if (dialogWindow != null)
         {
             dialogWindow.DisableDialogWindow();
@@ -35,12 +34,18 @@ public class LevelManager : MonoBehaviour
 
     public static void LoadLevel(string level)
     {
+        FindObjectOfType<AudioManager>().Play("LevelPlaying", 2f);
         CameraManager.SwitchActiveCamera(level);
 
         FindGameObject(StatesManager.gameStates[level].stateName).SetActive(true);
     }
     public static async void UnloadLevel(string level)
     {
+        if( FindGameObject(StatesManager.gameStates[level].stateName).TryGetComponent<SecondLevelScript>(out SecondLevelScript script) )
+        {
+            script.levelIsDisabling = true;
+        }
+        FindObjectOfType<AudioManager>().StopMusic("LevelPlaying", 2f);
         await StandardWait(1.5f);
 
         FindGameObject(StatesManager.gameStates[level].stateName).SetActive(false);
@@ -48,15 +53,19 @@ public class LevelManager : MonoBehaviour
 
     public static async void LoadOutro()
     {
+        FindObjectOfType<AudioManager>().Play("Outro", 2f);
         outroSceneObject.SetActive(true);
         await StandardWait(1f);
         CameraManager.SwitchActiveCamera("OutroScene");
         await StandardWait(3f);
         outroSceneObject.transform.GetChild(1).gameObject.SetActive(true);
+        FindObjectOfType<AudioManager>().TriggerSound("OutroSpeech");
+
     }
 
     public static async void UnloadOutro()
     {
+        FindObjectOfType<AudioManager>().StopSound("OutroSpeech");
         outroSceneObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Fading");
         outroSceneObject.transform.GetChild(1).gameObject.SetActive(false);
         await StandardWait(4f);
@@ -69,6 +78,7 @@ public class LevelManager : MonoBehaviour
         await StandardWait(3f);
         creditsCanvas.SetActive(true);
         await StandardWait(23f);
+        FindObjectOfType<AudioManager>().StopMusic("Outro", 2f);
         FindObjectOfType<GameManagerScript>().TerminateCurrentGame();
         await StandardWait(1f);
         creditsCanvas.SetActive(false);
@@ -76,10 +86,17 @@ public class LevelManager : MonoBehaviour
 
     public static async void SecretCredits()
     {
-        creditsCanvas = FindGameObject("CreditsCanvas");  // Change to secret canvas
+        //Modified function to be triggered once max score is achieved, plays a SeCrEt ViDeO ;)
+        creditsCanvas = FindGameObject("SecretCreditsCanvas");
         await StandardWait(3f);
         creditsCanvas.SetActive(true);
         await StandardWait(23f);
+        FindObjectOfType<AudioManager>().StopMusic("Outro", 2f);
+        creditsCanvas.transform.GetChild(1).gameObject.SetActive(true);
+        creditsCanvas.transform.GetChild(2).gameObject.SetActive(true);
+        await StandardWait(18f);
+        creditsCanvas.transform.GetChild(1).gameObject.SetActive(false);
+        creditsCanvas.transform.GetChild(2).gameObject.SetActive(false);
         FindObjectOfType<GameManagerScript>().TerminateCurrentGame();
         await StandardWait(1f);
         creditsCanvas.SetActive(false);
